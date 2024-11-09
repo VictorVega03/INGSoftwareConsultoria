@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vistas", "Vistas", "{E19D0364-6846-416E-9897-5E9539305BCB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controlador", "Controlador", "{1FD82364-FE2D-402A-A77F-1964AE67C8EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modelo", "Modelo", "{612BAF17-2950-41A5-B0B1-17D29CC958D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vistas", "Vistas\Vistas.csproj", "{2D3AC7D4-DD9D-4DB7-AA1A-C368CD5AF18B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D3AC7D4-DD9D-4DB7-AA1A-C368CD5AF18B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D3AC7D4-DD9D-4DB7-AA1A-C368CD5AF18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D3AC7D4-DD9D-4DB7-AA1A-C368CD5AF18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D3AC7D4-DD9D-4DB7-AA1A-C368CD5AF18B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2D3AC7D4-DD9D-4DB7-AA1A-C368CD5AF18B} = {E19D0364-6846-416E-9897-5E9539305BCB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C98B9D5A-5FEF-40BB-801E-C3D629097048}
+	EndGlobalSection
+EndGlobal
