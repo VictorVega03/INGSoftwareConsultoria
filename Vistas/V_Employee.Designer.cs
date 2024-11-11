@@ -38,7 +38,7 @@
             Pnl_Space1 = new Panel();
             Btn_Add_Emp = new Button();
             Pnl_Filtro = new Panel();
-            CmB_Filtro_Emp = new ComboBox();
+            BoxFiltroEmp = new ComboBox();
             Lbl_Filtro_Emp = new Label();
             Pnl_Emp.SuspendLayout();
             Pnl_Table_Emp.SuspendLayout();
@@ -79,7 +79,9 @@
             DGV_Table_Emp.Location = new Point(51, 33);
             DGV_Table_Emp.Margin = new Padding(3, 4, 3, 4);
             DGV_Table_Emp.Name = "DGV_Table_Emp";
+            DGV_Table_Emp.RowHeadersVisible = false;
             DGV_Table_Emp.RowHeadersWidth = 51;
+            DGV_Table_Emp.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGV_Table_Emp.Size = new Size(572, 427);
             DGV_Table_Emp.TabIndex = 4;
             // 
@@ -157,7 +159,7 @@
             // 
             // Pnl_Filtro
             // 
-            Pnl_Filtro.Controls.Add(CmB_Filtro_Emp);
+            Pnl_Filtro.Controls.Add(BoxFiltroEmp);
             Pnl_Filtro.Controls.Add(Lbl_Filtro_Emp);
             Pnl_Filtro.Dock = DockStyle.Top;
             Pnl_Filtro.Location = new Point(0, 0);
@@ -166,15 +168,17 @@
             Pnl_Filtro.Size = new Size(914, 80);
             Pnl_Filtro.TabIndex = 3;
             // 
-            // CmB_Filtro_Emp
+            // BoxFiltroEmp
             // 
-            CmB_Filtro_Emp.Font = new Font("Segoe UI", 11F);
-            CmB_Filtro_Emp.FormattingEnabled = true;
-            CmB_Filtro_Emp.Location = new Point(154, 20);
-            CmB_Filtro_Emp.Margin = new Padding(3, 4, 3, 4);
-            CmB_Filtro_Emp.Name = "CmB_Filtro_Emp";
-            CmB_Filtro_Emp.Size = new Size(199, 33);
-            CmB_Filtro_Emp.TabIndex = 3;
+            BoxFiltroEmp.DropDownStyle = ComboBoxStyle.DropDownList;
+            BoxFiltroEmp.Font = new Font("Segoe UI", 11F);
+            BoxFiltroEmp.FormattingEnabled = true;
+            BoxFiltroEmp.Location = new Point(236, 24);
+            BoxFiltroEmp.Margin = new Padding(3, 4, 3, 4);
+            BoxFiltroEmp.Name = "BoxFiltroEmp";
+            BoxFiltroEmp.Size = new Size(199, 33);
+            BoxFiltroEmp.TabIndex = 3;
+            BoxFiltroEmp.SelectedIndexChanged += BoxFiltroEmp_SelectedIndexChanged;
             // 
             // Lbl_Filtro_Emp
             // 
@@ -182,9 +186,9 @@
             Lbl_Filtro_Emp.Font = new Font("Segoe UI", 11F);
             Lbl_Filtro_Emp.Location = new Point(51, 27);
             Lbl_Filtro_Emp.Name = "Lbl_Filtro_Emp";
-            Lbl_Filtro_Emp.Size = new Size(99, 25);
+            Lbl_Filtro_Emp.Size = new Size(179, 25);
             Lbl_Filtro_Emp.TabIndex = 2;
-            Lbl_Filtro_Emp.Text = "Filtrar por:";
+            Lbl_Filtro_Emp.Text = "Filtrar por Permisos:";
             // 
             // V_Employee
             // 
@@ -212,7 +216,7 @@
         private Panel Pnl_Emp;
         private Panel Pnl_Filtro;
         private Label Lbl_Filtro_Emp;
-        private ComboBox CmB_Filtro_Emp;
+        private ComboBox BoxFiltroEmp;
         private Panel Pnl_Table_Emp;
         private DataGridView DGV_Table_Emp;
         private Panel Pnl_Buttons;

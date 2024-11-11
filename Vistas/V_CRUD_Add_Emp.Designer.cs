@@ -35,18 +35,18 @@
             Btn_Cancelar = new Button();
             Btn_Aceptar = new Button();
             Pnl_Add = new Panel();
+            BoxPuesto = new ComboBox();
+            label1 = new Label();
             Txt_Direccion_Emp = new TextBox();
             Lbl_Direccion_Emp = new Label();
             Txt_Nom_Emp = new TextBox();
             Txt_RFC_Emp = new TextBox();
             Txt_Email_Emp = new TextBox();
             Txt_Phone_Emp = new TextBox();
-            Txt_ID_Emp = new TextBox();
             Lbl_Name_Emp = new Label();
             Lbl_RFC_Emp = new Label();
             Lbl_Email_Emp = new Label();
             Lbl_Phone_Emp = new Label();
-            Lbl_ID_Emp = new Label();
             Pnl_CRUD_Add_Emp.SuspendLayout();
             Pnl_Buttons.SuspendLayout();
             Pnl_Add.SuspendLayout();
@@ -60,7 +60,7 @@
             Pnl_CRUD_Add_Emp.Location = new Point(0, 0);
             Pnl_CRUD_Add_Emp.Margin = new Padding(3, 4, 3, 4);
             Pnl_CRUD_Add_Emp.Name = "Pnl_CRUD_Add_Emp";
-            Pnl_CRUD_Add_Emp.Size = new Size(496, 475);
+            Pnl_CRUD_Add_Emp.Size = new Size(496, 445);
             Pnl_CRUD_Add_Emp.TabIndex = 1;
             // 
             // Pnl_Buttons
@@ -70,11 +70,11 @@
             Pnl_Buttons.Controls.Add(Btn_Cancelar);
             Pnl_Buttons.Controls.Add(Btn_Aceptar);
             Pnl_Buttons.Dock = DockStyle.Bottom;
-            Pnl_Buttons.Location = new Point(0, 395);
+            Pnl_Buttons.Location = new Point(0, 365);
             Pnl_Buttons.Margin = new Padding(3, 4, 3, 4);
             Pnl_Buttons.Name = "Pnl_Buttons";
             Pnl_Buttons.Size = new Size(496, 80);
-            Pnl_Buttons.TabIndex = 1;
+            Pnl_Buttons.TabIndex = 8;
             // 
             // Btn_Cancelar_Emp1
             // 
@@ -84,7 +84,7 @@
             Btn_Cancelar_Emp1.Margin = new Padding(3, 4, 3, 4);
             Btn_Cancelar_Emp1.Name = "Btn_Cancelar_Emp1";
             Btn_Cancelar_Emp1.Size = new Size(114, 40);
-            Btn_Cancelar_Emp1.TabIndex = 3;
+            Btn_Cancelar_Emp1.TabIndex = 7;
             Btn_Cancelar_Emp1.Text = "Cancelar";
             Btn_Cancelar_Emp1.UseVisualStyleBackColor = true;
             Btn_Cancelar_Emp1.Click += Btn_Cancelar_Emp1_Click;
@@ -97,7 +97,7 @@
             Btn_Aceptar_Emp1.Margin = new Padding(3, 4, 3, 4);
             Btn_Aceptar_Emp1.Name = "Btn_Aceptar_Emp1";
             Btn_Aceptar_Emp1.Size = new Size(114, 40);
-            Btn_Aceptar_Emp1.TabIndex = 2;
+            Btn_Aceptar_Emp1.TabIndex = 6;
             Btn_Aceptar_Emp1.Text = "Aceptar";
             Btn_Aceptar_Emp1.UseVisualStyleBackColor = true;
             Btn_Aceptar_Emp1.Click += Btn_Aceptar_Emp1_Click;
@@ -128,39 +128,58 @@
             // 
             // Pnl_Add
             // 
+            Pnl_Add.Controls.Add(BoxPuesto);
+            Pnl_Add.Controls.Add(label1);
             Pnl_Add.Controls.Add(Txt_Direccion_Emp);
             Pnl_Add.Controls.Add(Lbl_Direccion_Emp);
             Pnl_Add.Controls.Add(Txt_Nom_Emp);
             Pnl_Add.Controls.Add(Txt_RFC_Emp);
             Pnl_Add.Controls.Add(Txt_Email_Emp);
             Pnl_Add.Controls.Add(Txt_Phone_Emp);
-            Pnl_Add.Controls.Add(Txt_ID_Emp);
             Pnl_Add.Controls.Add(Lbl_Name_Emp);
             Pnl_Add.Controls.Add(Lbl_RFC_Emp);
             Pnl_Add.Controls.Add(Lbl_Email_Emp);
             Pnl_Add.Controls.Add(Lbl_Phone_Emp);
-            Pnl_Add.Controls.Add(Lbl_ID_Emp);
             Pnl_Add.Dock = DockStyle.Top;
             Pnl_Add.Location = new Point(0, 0);
             Pnl_Add.Margin = new Padding(3, 4, 3, 4);
             Pnl_Add.Name = "Pnl_Add";
-            Pnl_Add.Size = new Size(496, 393);
-            Pnl_Add.TabIndex = 0;
+            Pnl_Add.Size = new Size(496, 364);
+            Pnl_Add.TabIndex = 7;
+            // 
+            // BoxPuesto
+            // 
+            BoxPuesto.DropDownStyle = ComboBoxStyle.DropDownList;
+            BoxPuesto.FormattingEnabled = true;
+            BoxPuesto.Location = new Point(239, 86);
+            BoxPuesto.Name = "BoxPuesto";
+            BoxPuesto.Size = new Size(222, 28);
+            BoxPuesto.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 11F);
+            label1.Location = new Point(28, 86);
+            label1.Name = "label1";
+            label1.Size = new Size(91, 25);
+            label1.TabIndex = 19;
+            label1.Text = "Permisos:";
             // 
             // Txt_Direccion_Emp
             // 
             Txt_Direccion_Emp.Font = new Font("Segoe UI", 11F);
-            Txt_Direccion_Emp.Location = new Point(229, 327);
+            Txt_Direccion_Emp.Location = new Point(239, 313);
             Txt_Direccion_Emp.Margin = new Padding(3, 4, 3, 4);
             Txt_Direccion_Emp.Name = "Txt_Direccion_Emp";
             Txt_Direccion_Emp.Size = new Size(222, 32);
-            Txt_Direccion_Emp.TabIndex = 18;
+            Txt_Direccion_Emp.TabIndex = 5;
             // 
             // Lbl_Direccion_Emp
             // 
             Lbl_Direccion_Emp.AutoSize = true;
             Lbl_Direccion_Emp.Font = new Font("Segoe UI", 11F);
-            Lbl_Direccion_Emp.Location = new Point(34, 333);
+            Lbl_Direccion_Emp.Location = new Point(28, 316);
             Lbl_Direccion_Emp.Name = "Lbl_Direccion_Emp";
             Lbl_Direccion_Emp.Size = new Size(96, 25);
             Lbl_Direccion_Emp.TabIndex = 17;
@@ -169,55 +188,44 @@
             // Txt_Nom_Emp
             // 
             Txt_Nom_Emp.Font = new Font("Segoe UI", 11F);
-            Txt_Nom_Emp.Location = new Point(229, 87);
+            Txt_Nom_Emp.Location = new Point(239, 34);
             Txt_Nom_Emp.Margin = new Padding(3, 4, 3, 4);
             Txt_Nom_Emp.Name = "Txt_Nom_Emp";
             Txt_Nom_Emp.Size = new Size(222, 32);
-            Txt_Nom_Emp.TabIndex = 16;
+            Txt_Nom_Emp.TabIndex = 0;
             // 
             // Txt_RFC_Emp
             // 
             Txt_RFC_Emp.Font = new Font("Segoe UI", 11F);
-            Txt_RFC_Emp.Location = new Point(229, 147);
+            Txt_RFC_Emp.Location = new Point(239, 133);
             Txt_RFC_Emp.Margin = new Padding(3, 4, 3, 4);
             Txt_RFC_Emp.Name = "Txt_RFC_Emp";
             Txt_RFC_Emp.Size = new Size(222, 32);
-            Txt_RFC_Emp.TabIndex = 15;
+            Txt_RFC_Emp.TabIndex = 2;
             // 
             // Txt_Email_Emp
             // 
             Txt_Email_Emp.Font = new Font("Segoe UI", 11F);
-            Txt_Email_Emp.Location = new Point(229, 207);
+            Txt_Email_Emp.Location = new Point(239, 193);
             Txt_Email_Emp.Margin = new Padding(3, 4, 3, 4);
             Txt_Email_Emp.Name = "Txt_Email_Emp";
             Txt_Email_Emp.Size = new Size(222, 32);
-            Txt_Email_Emp.TabIndex = 14;
+            Txt_Email_Emp.TabIndex = 3;
             // 
             // Txt_Phone_Emp
             // 
             Txt_Phone_Emp.Font = new Font("Segoe UI", 11F);
-            Txt_Phone_Emp.Location = new Point(229, 267);
+            Txt_Phone_Emp.Location = new Point(239, 253);
             Txt_Phone_Emp.Margin = new Padding(3, 4, 3, 4);
             Txt_Phone_Emp.Name = "Txt_Phone_Emp";
             Txt_Phone_Emp.Size = new Size(222, 32);
-            Txt_Phone_Emp.TabIndex = 13;
-            // 
-            // Txt_ID_Emp
-            // 
-            Txt_ID_Emp.Enabled = false;
-            Txt_ID_Emp.Font = new Font("Segoe UI", 11F);
-            Txt_ID_Emp.Location = new Point(229, 27);
-            Txt_ID_Emp.Margin = new Padding(3, 4, 3, 4);
-            Txt_ID_Emp.Name = "Txt_ID_Emp";
-            Txt_ID_Emp.ReadOnly = true;
-            Txt_ID_Emp.Size = new Size(222, 32);
-            Txt_ID_Emp.TabIndex = 8;
+            Txt_Phone_Emp.TabIndex = 4;
             // 
             // Lbl_Name_Emp
             // 
             Lbl_Name_Emp.AutoSize = true;
             Lbl_Name_Emp.Font = new Font("Segoe UI", 11F);
-            Lbl_Name_Emp.Location = new Point(34, 93);
+            Lbl_Name_Emp.Location = new Point(28, 37);
             Lbl_Name_Emp.Name = "Lbl_Name_Emp";
             Lbl_Name_Emp.Size = new Size(205, 25);
             Lbl_Name_Emp.TabIndex = 7;
@@ -227,7 +235,7 @@
             // 
             Lbl_RFC_Emp.AutoSize = true;
             Lbl_RFC_Emp.Font = new Font("Segoe UI", 11F);
-            Lbl_RFC_Emp.Location = new Point(34, 153);
+            Lbl_RFC_Emp.Location = new Point(28, 136);
             Lbl_RFC_Emp.Name = "Lbl_RFC_Emp";
             Lbl_RFC_Emp.Size = new Size(168, 25);
             Lbl_RFC_Emp.TabIndex = 6;
@@ -237,7 +245,7 @@
             // 
             Lbl_Email_Emp.AutoSize = true;
             Lbl_Email_Emp.Font = new Font("Segoe UI", 11F);
-            Lbl_Email_Emp.Location = new Point(34, 213);
+            Lbl_Email_Emp.Location = new Point(28, 196);
             Lbl_Email_Emp.Name = "Lbl_Email_Emp";
             Lbl_Email_Emp.Size = new Size(71, 25);
             Lbl_Email_Emp.TabIndex = 5;
@@ -247,27 +255,17 @@
             // 
             Lbl_Phone_Emp.AutoSize = true;
             Lbl_Phone_Emp.Font = new Font("Segoe UI", 11F);
-            Lbl_Phone_Emp.Location = new Point(34, 273);
+            Lbl_Phone_Emp.Location = new Point(28, 256);
             Lbl_Phone_Emp.Name = "Lbl_Phone_Emp";
             Lbl_Phone_Emp.Size = new Size(192, 25);
             Lbl_Phone_Emp.TabIndex = 4;
             Lbl_Phone_Emp.Text = "Numero de Contacto:";
             // 
-            // Lbl_ID_Emp
-            // 
-            Lbl_ID_Emp.AutoSize = true;
-            Lbl_ID_Emp.Font = new Font("Segoe UI", 11F);
-            Lbl_ID_Emp.Location = new Point(34, 33);
-            Lbl_ID_Emp.Name = "Lbl_ID_Emp";
-            Lbl_ID_Emp.Size = new Size(154, 25);
-            Lbl_ID_Emp.TabIndex = 0;
-            Lbl_ID_Emp.Text = "ID del Empleado:";
-            // 
             // V_CRUD_Add_Emp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(496, 475);
+            ClientSize = new Size(496, 445);
             Controls.Add(Pnl_CRUD_Add_Emp);
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
@@ -292,15 +290,15 @@
         private TextBox Txt_RFC_Emp;
         private TextBox Txt_Email_Emp;
         private TextBox Txt_Phone_Emp;
-        private TextBox Txt_ID_Emp;
         private Label Lbl_Name_Emp;
         private Label Lbl_RFC_Emp;
         private Label Lbl_Email_Emp;
         private Label Lbl_Phone_Emp;
-        private Label Lbl_ID_Emp;
         private Label Lbl_Direccion_Emp;
         private TextBox Txt_Direccion_Emp;
         private Button Btn_Cancelar_Emp1;
         private Button Btn_Aceptar_Emp1;
+        private ComboBox BoxPuesto;
+        private Label label1;
     }
 }

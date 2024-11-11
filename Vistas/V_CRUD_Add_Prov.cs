@@ -26,5 +26,10 @@ namespace Vistas
         {
             this.Close();
         }
+
+        private void Pnl_Add_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
