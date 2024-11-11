@@ -35,16 +35,18 @@
             Btn_Cancelar_Emp_Prov1 = new Button();
             Btn_Aceptar_Emp_Prov1 = new Button();
             Pnl_Add = new Panel();
+            Txt_ID_Emp_Prov = new TextBox();
+            Lbl_ID_Emp_Prov = new Label();
+            BoxProveedor = new ComboBox();
+            label1 = new Label();
             Txt_Nom_Emp_Prov = new TextBox();
             Txt_RFC_Emp_Prov = new TextBox();
             Txt_Email_Emp_Prov = new TextBox();
             Txt_Phone_Emp_Prov = new TextBox();
-            Txt_ID_Emp_Prov = new TextBox();
             Lbl_Name_Emp_Prov = new Label();
             Lbl_RFC_Emp_Prov = new Label();
             Lbl_Email_Emp_Prov = new Label();
             Lbl_Phone_Emp_Prov = new Label();
-            Lbl_ID_Emp_Prov = new Label();
             Pnl_CRUD_Upd_Emp_Prov.SuspendLayout();
             Pnl_Buttons.SuspendLayout();
             Pnl_Add.SuspendLayout();
@@ -58,7 +60,7 @@
             Pnl_CRUD_Upd_Emp_Prov.Location = new Point(0, 0);
             Pnl_CRUD_Upd_Emp_Prov.Margin = new Padding(3, 4, 3, 4);
             Pnl_CRUD_Upd_Emp_Prov.Name = "Pnl_CRUD_Upd_Emp_Prov";
-            Pnl_CRUD_Upd_Emp_Prov.Size = new Size(496, 415);
+            Pnl_CRUD_Upd_Emp_Prov.Size = new Size(496, 478);
             Pnl_CRUD_Upd_Emp_Prov.TabIndex = 3;
             // 
             // Pnl_Buttons
@@ -68,7 +70,7 @@
             Pnl_Buttons.Controls.Add(Btn_Cancelar_Emp_Prov1);
             Pnl_Buttons.Controls.Add(Btn_Aceptar_Emp_Prov1);
             Pnl_Buttons.Dock = DockStyle.Bottom;
-            Pnl_Buttons.Location = new Point(0, 335);
+            Pnl_Buttons.Location = new Point(0, 398);
             Pnl_Buttons.Margin = new Padding(3, 4, 3, 4);
             Pnl_Buttons.Name = "Pnl_Buttons";
             Pnl_Buttons.Size = new Size(496, 80);
@@ -126,125 +128,146 @@
             // 
             // Pnl_Add
             // 
+            Pnl_Add.Controls.Add(BoxProveedor);
+            Pnl_Add.Controls.Add(label1);
             Pnl_Add.Controls.Add(Txt_Nom_Emp_Prov);
             Pnl_Add.Controls.Add(Txt_RFC_Emp_Prov);
             Pnl_Add.Controls.Add(Txt_Email_Emp_Prov);
             Pnl_Add.Controls.Add(Txt_Phone_Emp_Prov);
-            Pnl_Add.Controls.Add(Txt_ID_Emp_Prov);
             Pnl_Add.Controls.Add(Lbl_Name_Emp_Prov);
             Pnl_Add.Controls.Add(Lbl_RFC_Emp_Prov);
             Pnl_Add.Controls.Add(Lbl_Email_Emp_Prov);
             Pnl_Add.Controls.Add(Lbl_Phone_Emp_Prov);
+            Pnl_Add.Controls.Add(Txt_ID_Emp_Prov);
             Pnl_Add.Controls.Add(Lbl_ID_Emp_Prov);
             Pnl_Add.Dock = DockStyle.Top;
             Pnl_Add.Location = new Point(0, 0);
             Pnl_Add.Margin = new Padding(3, 4, 3, 4);
             Pnl_Add.Name = "Pnl_Add";
-            Pnl_Add.Size = new Size(496, 333);
+            Pnl_Add.Size = new Size(496, 397);
             Pnl_Add.TabIndex = 0;
-            // 
-            // Txt_Nom_Emp_Prov
-            // 
-            Txt_Nom_Emp_Prov.Font = new Font("Segoe UI", 11F);
-            Txt_Nom_Emp_Prov.Location = new Point(229, 87);
-            Txt_Nom_Emp_Prov.Margin = new Padding(3, 4, 3, 4);
-            Txt_Nom_Emp_Prov.Name = "Txt_Nom_Emp_Prov";
-            Txt_Nom_Emp_Prov.Size = new Size(222, 32);
-            Txt_Nom_Emp_Prov.TabIndex = 16;
-            // 
-            // Txt_RFC_Emp_Prov
-            // 
-            Txt_RFC_Emp_Prov.Font = new Font("Segoe UI", 11F);
-            Txt_RFC_Emp_Prov.Location = new Point(229, 147);
-            Txt_RFC_Emp_Prov.Margin = new Padding(3, 4, 3, 4);
-            Txt_RFC_Emp_Prov.Name = "Txt_RFC_Emp_Prov";
-            Txt_RFC_Emp_Prov.Size = new Size(222, 32);
-            Txt_RFC_Emp_Prov.TabIndex = 15;
-            // 
-            // Txt_Email_Emp_Prov
-            // 
-            Txt_Email_Emp_Prov.Font = new Font("Segoe UI", 11F);
-            Txt_Email_Emp_Prov.Location = new Point(229, 207);
-            Txt_Email_Emp_Prov.Margin = new Padding(3, 4, 3, 4);
-            Txt_Email_Emp_Prov.Name = "Txt_Email_Emp_Prov";
-            Txt_Email_Emp_Prov.Size = new Size(222, 32);
-            Txt_Email_Emp_Prov.TabIndex = 14;
-            // 
-            // Txt_Phone_Emp_Prov
-            // 
-            Txt_Phone_Emp_Prov.Font = new Font("Segoe UI", 11F);
-            Txt_Phone_Emp_Prov.Location = new Point(229, 267);
-            Txt_Phone_Emp_Prov.Margin = new Padding(3, 4, 3, 4);
-            Txt_Phone_Emp_Prov.Name = "Txt_Phone_Emp_Prov";
-            Txt_Phone_Emp_Prov.Size = new Size(222, 32);
-            Txt_Phone_Emp_Prov.TabIndex = 13;
             // 
             // Txt_ID_Emp_Prov
             // 
             Txt_ID_Emp_Prov.Enabled = false;
             Txt_ID_Emp_Prov.Font = new Font("Segoe UI", 11F);
-            Txt_ID_Emp_Prov.Location = new Point(229, 27);
+            Txt_ID_Emp_Prov.Location = new Point(236, 27);
             Txt_ID_Emp_Prov.Margin = new Padding(3, 4, 3, 4);
             Txt_ID_Emp_Prov.Name = "Txt_ID_Emp_Prov";
             Txt_ID_Emp_Prov.ReadOnly = true;
             Txt_ID_Emp_Prov.Size = new Size(222, 32);
-            Txt_ID_Emp_Prov.TabIndex = 8;
+            Txt_ID_Emp_Prov.TabIndex = 0;
+            // 
+            // Lbl_ID_Emp_Prov
+            // 
+            Lbl_ID_Emp_Prov.AutoSize = true;
+            Lbl_ID_Emp_Prov.Font = new Font("Segoe UI", 11F);
+            Lbl_ID_Emp_Prov.Location = new Point(25, 34);
+            Lbl_ID_Emp_Prov.Name = "Lbl_ID_Emp_Prov";
+            Lbl_ID_Emp_Prov.Size = new Size(154, 25);
+            Lbl_ID_Emp_Prov.TabIndex = 0;
+            Lbl_ID_Emp_Prov.Text = "ID del Empleado:";
+            // 
+            // BoxProveedor
+            // 
+            BoxProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
+            BoxProveedor.FormattingEnabled = true;
+            BoxProveedor.Location = new Point(236, 129);
+            BoxProveedor.Name = "BoxProveedor";
+            BoxProveedor.Size = new Size(222, 28);
+            BoxProveedor.TabIndex = 2;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 11F);
+            label1.Location = new Point(25, 132);
+            label1.Name = "label1";
+            label1.Size = new Size(103, 25);
+            label1.TabIndex = 2;
+            label1.Text = "Proveedor:";
+            // 
+            // Txt_Nom_Emp_Prov
+            // 
+            Txt_Nom_Emp_Prov.Font = new Font("Segoe UI", 11F);
+            Txt_Nom_Emp_Prov.Location = new Point(236, 78);
+            Txt_Nom_Emp_Prov.Margin = new Padding(3, 4, 3, 4);
+            Txt_Nom_Emp_Prov.Name = "Txt_Nom_Emp_Prov";
+            Txt_Nom_Emp_Prov.Size = new Size(222, 32);
+            Txt_Nom_Emp_Prov.TabIndex = 1;
+            // 
+            // Txt_RFC_Emp_Prov
+            // 
+            Txt_RFC_Emp_Prov.Font = new Font("Segoe UI", 11F);
+            Txt_RFC_Emp_Prov.Location = new Point(236, 183);
+            Txt_RFC_Emp_Prov.Margin = new Padding(3, 4, 3, 4);
+            Txt_RFC_Emp_Prov.Name = "Txt_RFC_Emp_Prov";
+            Txt_RFC_Emp_Prov.Size = new Size(222, 32);
+            Txt_RFC_Emp_Prov.TabIndex = 3;
+            // 
+            // Txt_Email_Emp_Prov
+            // 
+            Txt_Email_Emp_Prov.Font = new Font("Segoe UI", 11F);
+            Txt_Email_Emp_Prov.Location = new Point(236, 243);
+            Txt_Email_Emp_Prov.Margin = new Padding(3, 4, 3, 4);
+            Txt_Email_Emp_Prov.Name = "Txt_Email_Emp_Prov";
+            Txt_Email_Emp_Prov.Size = new Size(222, 32);
+            Txt_Email_Emp_Prov.TabIndex = 4;
+            // 
+            // Txt_Phone_Emp_Prov
+            // 
+            Txt_Phone_Emp_Prov.Font = new Font("Segoe UI", 11F);
+            Txt_Phone_Emp_Prov.Location = new Point(236, 303);
+            Txt_Phone_Emp_Prov.Margin = new Padding(3, 4, 3, 4);
+            Txt_Phone_Emp_Prov.Name = "Txt_Phone_Emp_Prov";
+            Txt_Phone_Emp_Prov.Size = new Size(222, 32);
+            Txt_Phone_Emp_Prov.TabIndex = 5;
             // 
             // Lbl_Name_Emp_Prov
             // 
             Lbl_Name_Emp_Prov.AutoSize = true;
             Lbl_Name_Emp_Prov.Font = new Font("Segoe UI", 11F);
-            Lbl_Name_Emp_Prov.Location = new Point(34, 93);
+            Lbl_Name_Emp_Prov.Location = new Point(25, 81);
             Lbl_Name_Emp_Prov.Name = "Lbl_Name_Emp_Prov";
             Lbl_Name_Emp_Prov.Size = new Size(205, 25);
-            Lbl_Name_Emp_Prov.TabIndex = 7;
+            Lbl_Name_Emp_Prov.TabIndex = 1;
             Lbl_Name_Emp_Prov.Text = "Nombre del Empleado:";
             // 
             // Lbl_RFC_Emp_Prov
             // 
             Lbl_RFC_Emp_Prov.AutoSize = true;
             Lbl_RFC_Emp_Prov.Font = new Font("Segoe UI", 11F);
-            Lbl_RFC_Emp_Prov.Location = new Point(34, 153);
+            Lbl_RFC_Emp_Prov.Location = new Point(25, 186);
             Lbl_RFC_Emp_Prov.Name = "Lbl_RFC_Emp_Prov";
             Lbl_RFC_Emp_Prov.Size = new Size(168, 25);
-            Lbl_RFC_Emp_Prov.TabIndex = 6;
+            Lbl_RFC_Emp_Prov.TabIndex = 3;
             Lbl_RFC_Emp_Prov.Text = "RFC del Empleado:";
             // 
             // Lbl_Email_Emp_Prov
             // 
             Lbl_Email_Emp_Prov.AutoSize = true;
             Lbl_Email_Emp_Prov.Font = new Font("Segoe UI", 11F);
-            Lbl_Email_Emp_Prov.Location = new Point(34, 213);
+            Lbl_Email_Emp_Prov.Location = new Point(25, 246);
             Lbl_Email_Emp_Prov.Name = "Lbl_Email_Emp_Prov";
             Lbl_Email_Emp_Prov.Size = new Size(71, 25);
-            Lbl_Email_Emp_Prov.TabIndex = 5;
+            Lbl_Email_Emp_Prov.TabIndex = 4;
             Lbl_Email_Emp_Prov.Text = "E-Mail:";
             // 
             // Lbl_Phone_Emp_Prov
             // 
             Lbl_Phone_Emp_Prov.AutoSize = true;
             Lbl_Phone_Emp_Prov.Font = new Font("Segoe UI", 11F);
-            Lbl_Phone_Emp_Prov.Location = new Point(34, 273);
+            Lbl_Phone_Emp_Prov.Location = new Point(25, 306);
             Lbl_Phone_Emp_Prov.Name = "Lbl_Phone_Emp_Prov";
             Lbl_Phone_Emp_Prov.Size = new Size(192, 25);
-            Lbl_Phone_Emp_Prov.TabIndex = 4;
+            Lbl_Phone_Emp_Prov.TabIndex = 5;
             Lbl_Phone_Emp_Prov.Text = "Numero de Contacto:";
-            // 
-            // Lbl_ID_Emp_Prov
-            // 
-            Lbl_ID_Emp_Prov.AutoSize = true;
-            Lbl_ID_Emp_Prov.Font = new Font("Segoe UI", 11F);
-            Lbl_ID_Emp_Prov.Location = new Point(34, 33);
-            Lbl_ID_Emp_Prov.Name = "Lbl_ID_Emp_Prov";
-            Lbl_ID_Emp_Prov.Size = new Size(154, 25);
-            Lbl_ID_Emp_Prov.TabIndex = 0;
-            Lbl_ID_Emp_Prov.Text = "ID del Empleado:";
             // 
             // V_CRUD_Upd_Emp_Prov
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(496, 415);
+            ClientSize = new Size(496, 478);
             Controls.Add(Pnl_CRUD_Upd_Emp_Prov);
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
@@ -265,17 +288,19 @@
         private Button Btn_Cancelar_Emp_Prov1;
         private Button Btn_Aceptar_Emp_Prov1;
         private Panel Pnl_Add;
+        private TextBox Txt_ID_Emp_Prov;
+        private Label Lbl_ID_Emp_Prov;
+        private Button Btn_Cancelar_Emp_Prov2;
+        private Button Btn_Aceptar_Emp_Prov2;
+        private ComboBox BoxProveedor;
+        private Label label1;
         private TextBox Txt_Nom_Emp_Prov;
         private TextBox Txt_RFC_Emp_Prov;
         private TextBox Txt_Email_Emp_Prov;
         private TextBox Txt_Phone_Emp_Prov;
-        private TextBox Txt_ID_Emp_Prov;
         private Label Lbl_Name_Emp_Prov;
         private Label Lbl_RFC_Emp_Prov;
         private Label Lbl_Email_Emp_Prov;
         private Label Lbl_Phone_Emp_Prov;
-        private Label Lbl_ID_Emp_Prov;
-        private Button Btn_Cancelar_Emp_Prov2;
-        private Button Btn_Aceptar_Emp_Prov2;
     }
 }

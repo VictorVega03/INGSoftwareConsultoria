@@ -66,7 +66,7 @@ namespace Vistas
             DGV_Table_Emp.Columns["Id_Emp"].HeaderText = "ID Empleado";
             DGV_Table_Emp.Columns["Nom_Emp"].HeaderText = "Nombre";
             DGV_Table_Emp.Columns["Permiso"].HeaderText = "Permisos";
-            DGV_Table_Emp.Columns["RFC_Emp"].HeaderText = "RFC";
+            DGV_Table_Emp.Columns["RFC_Emp"].HeaderText = "RFC Empleado";
             DGV_Table_Emp.Columns["Email_Emp"].HeaderText = "Correo";
             DGV_Table_Emp.Columns["Phone_Emp"].HeaderText = "Teléfono";
             DGV_Table_Emp.Columns["Direccion_Emp"].HeaderText = "Dirección";
@@ -88,13 +88,13 @@ namespace Vistas
             if (DGV_Table_Emp.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = DGV_Table_Emp.SelectedRows[0];
-                string idEmpleado = selectedRow.Cells["Id_Emp"].Value.ToString();
-                string nombre = selectedRow.Cells["Nom_Emp"].Value.ToString();
-                string puesto = selectedRow.Cells["Permiso"].Value.ToString();
-                string rfc = selectedRow.Cells["RFC_Emp"].Value.ToString();
-                string email = selectedRow.Cells["Email_Emp"].Value.ToString();
-                string telefono = selectedRow.Cells["Phone_Emp"].Value.ToString();
-                string direccion = selectedRow.Cells["Direccion_Emp"].Value.ToString();
+                string idEmpleado = selectedRow.Cells["Id_Emp"].Value?.ToString() ?? "N/A";
+                string nombre = selectedRow.Cells["Nom_Emp"].Value?.ToString() ?? "N/A";
+                string puesto = selectedRow.Cells["Permiso"].Value?.ToString() ?? "N/A";
+                string rfc = selectedRow.Cells["RFC_Emp"].Value?.ToString() ?? "N/A";
+                string email = selectedRow.Cells["Email_Emp"].Value?.ToString() ?? "N/A";
+                string telefono = selectedRow.Cells["Phone_Emp"].Value?.ToString() ?? "N/A";
+                string direccion = selectedRow.Cells["Direccion_Emp"].Value?.ToString() ?? "N/A";
 
                 V_CRUD_Upd_Emp upd_Emp = new V_CRUD_Upd_Emp(idEmpleado, nombre, puesto, rfc, email, telefono, direccion);
                 upd_Emp.ShowDialog();

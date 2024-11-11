@@ -14,6 +14,8 @@ namespace Vistas
 {
     public partial class V_CRUD_Add_Client : Form
     {
+        string Cuando;
+
         public V_CRUD_Add_Client()
         {
             InitializeComponent();
@@ -21,15 +23,16 @@ namespace Vistas
 
         private void Btn_Aceptar_Cliente1_Click(object sender, EventArgs e)
         {
+            string id = generar_IdCliente();
             string nombreCliente = Txt_Nom_Cliente.Text;
             string rfcCliente = Txt_RFC_Cliente.Text;
             string correoCliente = Txt_Email_Cliente.Text;
             string telefonoCliente = Txt_Phone_Cliente.Text;
 
-
-            InsertarCliente(nombreCliente, rfcCliente, correoCliente, telefonoCliente);
+            InsertarCliente(id, nombreCliente, rfcCliente, correoCliente, telefonoCliente);
 
             MessageBox.Show("Cliente Agregado Exitosamente");
+            this.Close();
         }
 
         private void Btn_Cancelar_Cliente1_Click(object sender, EventArgs e)
@@ -37,23 +40,50 @@ namespace Vistas
             this.Close();
         }
 
-        private void InsertarCliente(string nombre, string rfc, string correo, string telefono)
+        private string generar_IdCliente()
         {
-
+            string nuevoId = "C1001"; // ID inicial en caso de que no haya clientes en la tabla.
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
-            string query = "INSERT INTO Clientes (Nom_Client, RFC_Client, Email_Client, Phone_Client) VALUES (@Nombre, @Correo, @Telefono)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT TOP 1 Id_Client FROM Clientes WHERE Id_Client LIKE 'C%' ORDER BY Id_Client DESC";
 
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+
+                var result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    string ultimoId = result.ToString();
+                    int numeroActual = int.Parse(ultimoId.Substring(1)); // Extrae el número quitando la "C"
+                    int nuevoNumero = numeroActual + 1; // Suma 1 al último número
+                    nuevoId = "C" + nuevoNumero.ToString("D4"); // Formatea el nuevo ID
+                }
+            }
+
+            return nuevoId;
+        }
+
+        private void InsertarCliente(string id, string nombre, string rfc, string correo, string telefono)
+        {
+            DateTime getFechayHora = DateTime.Now;
+            Cuando = getFechayHora.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            string query = "INSERT INTO Clientes (Id_Client, Nom_Client, RFC_Client, Email_Client, Phone_Client, LifeOrDie, Cuando) VALUES (@Id, @Nombre, @RFC, @Correo, @Telefono, @LifeOrDie, @Cuando)";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@Id", id);
                     command.Parameters.AddWithValue("@Nombre", nombre);
                     command.Parameters.AddWithValue("@RFC", rfc);
                     command.Parameters.AddWithValue("@Correo", correo);
                     command.Parameters.AddWithValue("@Telefono", telefono);
-
+                    command.Parameters.AddWithValue("@LifeOrDie", 1);
+                    command.Parameters.AddWithValue("@Cuando", Cuando);
 
                     connection.Open();
                     command.ExecuteNonQuery();
@@ -61,19 +91,5 @@ namespace Vistas
             }
         }
 
-        private void Pnl_Add_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Pnl_Add_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Pnl_Add_Paint_2(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

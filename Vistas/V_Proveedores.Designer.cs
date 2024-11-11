@@ -80,7 +80,9 @@
             DGV_Table_Prov.Location = new Point(51, 33);
             DGV_Table_Prov.Margin = new Padding(3, 4, 3, 4);
             DGV_Table_Prov.Name = "DGV_Table_Prov";
+            DGV_Table_Prov.RowHeadersVisible = false;
             DGV_Table_Prov.RowHeadersWidth = 51;
+            DGV_Table_Prov.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGV_Table_Prov.Size = new Size(572, 427);
             DGV_Table_Prov.TabIndex = 4;
             // 
@@ -111,6 +113,7 @@
             Btn_Eliminar_Prov.TabIndex = 9;
             Btn_Eliminar_Prov.Text = "Eliminar Proveedor";
             Btn_Eliminar_Prov.UseVisualStyleBackColor = true;
+            Btn_Eliminar_Prov.Click += Btn_Eliminar_Prov_Click;
             // 
             // panel1
             // 
@@ -182,6 +185,7 @@
             // 
             // CmB_Filtro_Prov
             // 
+            CmB_Filtro_Prov.DropDownStyle = ComboBoxStyle.DropDownList;
             CmB_Filtro_Prov.Font = new Font("Segoe UI", 11F);
             CmB_Filtro_Prov.FormattingEnabled = true;
             CmB_Filtro_Prov.Location = new Point(154, 20);

@@ -14,9 +14,7 @@ namespace Vistas
 {
     public partial class V_CRUD_Upd_Emp : Form
     {
-        public int IdEmpleado { get; private set; }
         public string NombreEmpleado { get; private set; }
-        public string PuestoEmpleado { get; private set; }
         public string RfcEmpleado { get; private set; }
         public string EmailEmpleado { get; private set; }
         public string TelefonoEmpleado { get; private set; }
