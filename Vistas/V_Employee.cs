@@ -15,13 +15,15 @@ namespace Vistas
     public partial class V_Employee : Form
     {
         private DataTable empleadosDataTable;
+        private V_NavBar NavBar;
 
-        public V_Employee()
+        public V_Employee(V_NavBar MainNavBar)
         {
             InitializeComponent();
-            LlenarComboBoxPermisos();            
-            CargarDatosEmpleados();
-            ConfigurarTabla();            
+            this.NavBar = MainNavBar;
+            LlenarComboBoxPermisos();
+            CargarDatosEmpleados("");
+            ConfigurarTabla();
             DGV_Table_Emp.Focus();
         }
 
@@ -39,13 +41,7 @@ namespace Vistas
                 // Agregar la opción "Todos" al ComboBox
                 DataRow newRow = dataTable.NewRow();
                 newRow["WorkPosition_Permits"] = "Todos";
-                dataTable.Rows.InsertAt(newRow, 0); // Insertar al inicio
-
-                // Asignar el DataTable como origen de datos del ComboBox
-                BoxFiltroEmp.DataSource = dataTable;
-                BoxFiltroEmp.DisplayMember = "WorkPosition_Permits"; // Mostrar WorkPosition_Permits
-                BoxFiltroEmp.ValueMember = "Id_Permits";             // Guardar Id_Permits
-                BoxFiltroEmp.SelectedIndex = 0; // Seleccionar "Todos" por defecto
+                dataTable.Rows.InsertAt(newRow, 0); // Insertar al inicio                
             }
         }
 
@@ -74,13 +70,26 @@ namespace Vistas
             // Habilitar scroll automático
             DGV_Table_Emp.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DGV_Table_Emp.ScrollBars = ScrollBars.Both;
+
+            DGV_Table_Emp.ReadOnly = true;
+            DGV_Table_Emp.AllowUserToAddRows = false;
+
+            // Configuración de colores
+            DGV_Table_Emp.BackgroundColor = Color.AliceBlue; // Fondo general de la tabla
+            DGV_Table_Emp.GridColor = Color.SteelBlue; // Color de las líneas de la cuadrícula
+
+            // Configuración de las celdas
+            DGV_Table_Emp.DefaultCellStyle.BackColor = Color.LightCyan; // Fondo de las celdas
+            DGV_Table_Emp.DefaultCellStyle.ForeColor = Color.Black; // Texto de las celdas
+            DGV_Table_Emp.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
+            DGV_Table_Emp.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
         }
 
         private void Btn_Add_Emp_Click(object sender, EventArgs e)
         {
             V_CRUD_Add_Emp Add_Emp = new V_CRUD_Add_Emp();
             Add_Emp.ShowDialog();
-            CargarDatosEmpleados();
+            CargarDatosEmpleados("");
         }
 
         private void Btn_Upd_Emp_Click(object sender, EventArgs e)
@@ -96,9 +105,9 @@ namespace Vistas
                 string telefono = selectedRow.Cells["Phone_Emp"].Value?.ToString() ?? "N/A";
                 string direccion = selectedRow.Cells["Direccion_Emp"].Value?.ToString() ?? "N/A";
 
-                V_CRUD_Upd_Emp upd_Emp = new V_CRUD_Upd_Emp(idEmpleado, nombre, puesto, rfc, email, telefono, direccion);
+                V_CRUD_Upd_Emp upd_Emp = new V_CRUD_Upd_Emp(idEmpleado, nombre, puesto, rfc, email, telefono, direccion);             
                 upd_Emp.ShowDialog();
-                CargarDatosEmpleados();
+                CargarDatosEmpleados("");
             }
             else
             {
@@ -124,7 +133,7 @@ namespace Vistas
                     {
                         deleteEmpleado(idEmpleado);
                         MessageBox.Show("Empleado eliminado exitosamente.");
-                        CargarDatosEmpleados();
+                        CargarDatosEmpleados("");
                     }
                 }
                 else
@@ -136,7 +145,7 @@ namespace Vistas
             {
                 MessageBox.Show("Por favor, seleccione un empleado para eliminar.");
             }
-            CargarDatosEmpleados();
+            CargarDatosEmpleados("");
         }
 
         private void deleteEmpleado(string idEmpleado)
@@ -153,62 +162,57 @@ namespace Vistas
             }
         }
 
-        private void CargarDatosEmpleados()
+        public void CargarDatosEmpleados(string filtro)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             string query = @"
-        SELECT 
-            Empleados.Id_Emp,
-            Empleados.Nom_Emp,
-            Permisos.WorkPosition_Permits AS Permiso,
-            Empleados.RFC_Emp,
-            Empleados.Email_Emp,
-            Empleados.Phone_Emp,
-            Empleados.Direccion_Emp,
-            Empleados.Cuando
-        FROM Empleados
-        INNER JOIN Permisos ON Empleados.Id_Permits = Permisos.Id_Permits WHERE LifeOrDIe = 1 ORDER BY Empleados.Cuando DESC";
+SELECT 
+    Empleados.Id_Emp,
+    Empleados.Nom_Emp,
+    Permisos.WorkPosition_Permits AS Permiso,
+    Empleados.RFC_Emp,
+    Empleados.Email_Emp,
+    Empleados.Phone_Emp,
+    Empleados.Direccion_Emp,
+    Empleados.Cuando
+FROM 
+    Empleados
+INNER JOIN 
+    Permisos ON Empleados.Id_Permits = Permisos.Id_Permits
+WHERE 
+    LifeOrDIe = 1
+    AND (
+        Empleados.Id_Emp LIKE @Filtro OR
+        Empleados.Nom_Emp LIKE @Filtro OR
+        Permisos.WorkPosition_Permits LIKE @Filtro OR
+        Empleados.RFC_Emp LIKE @Filtro OR
+        Empleados.Email_Emp LIKE @Filtro OR
+        Empleados.Phone_Emp LIKE @Filtro OR
+        Empleados.Direccion_Emp LIKE @Filtro OR
+        CONVERT(VARCHAR, Empleados.Cuando, 120) LIKE @Filtro
+    )
+ORDER BY 
+    Empleados.Cuando DESC";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
-                empleadosDataTable = new DataTable();
-                dataAdapter.Fill(empleadosDataTable);
-                empleadosDataTable.Columns.Remove("Cuando");
-                DGV_Table_Emp.DataSource = empleadosDataTable;
-            }
-        }
-
-        private void BoxFiltroEmp_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FiltrarDatosEmpleados();
-        }
-
-        private void FiltrarDatosEmpleados()
-        {
-            if (!string.IsNullOrEmpty(BoxFiltroEmp.Text))
-            {
-                if (BoxFiltroEmp.Text == "Todos")
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Si no hay filtro, mostrar todos los datos
+                    // Agregar el filtro con comodines para la búsqueda
+                    command.Parameters.AddWithValue("@Filtro", $"%{filtro}%");
+
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                    empleadosDataTable = new DataTable();
+                    dataAdapter.Fill(empleadosDataTable);
+                    empleadosDataTable.Columns.Remove("Cuando");
                     DGV_Table_Emp.DataSource = empleadosDataTable;
                 }
-                else
-                {
-                    string permiso = BoxFiltroEmp.Text; // Obtener el texto seleccionado en el ComboBox (nombre del permiso)
-
-                    // Crear una vista del DataTable original
-                    DataView dataView = new DataView(empleadosDataTable);
-
-                    // Aplicar el filtro por el nombre del permiso
-                    dataView.RowFilter = $"Permiso = '{permiso}'"; // Filtrar por el nombre exacto del permiso
-
-                    // Asignar la vista filtrada al DataGridView
-                    DGV_Table_Emp.DataSource = dataView;
-                }
             }
-
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NavBar.AbrirFormularioEnPanel(new V_EmployeeRemoved(), "Empleados Eliminados");
+        }
     }
 }

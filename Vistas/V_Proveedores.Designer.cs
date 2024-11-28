@@ -32,6 +32,7 @@
             Pnl_Table_Prov = new Panel();
             DGV_Table_Prov = new DataGridView();
             Pnl_Buttons = new Panel();
+            BProvRemoved = new Button();
             Btn_Eliminar_Prov = new Button();
             panel1 = new Panel();
             Btn_Upd_Prov = new Button();
@@ -39,13 +40,10 @@
             Btn_Emp_Prov = new Button();
             Btn_Add_Prov = new Button();
             Pnl_Filtro = new Panel();
-            CmB_Filtro_Prov = new ComboBox();
-            Lbl_Filtro_Prov = new Label();
             Pnl_Prov.SuspendLayout();
             Pnl_Table_Prov.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGV_Table_Prov).BeginInit();
             Pnl_Buttons.SuspendLayout();
-            Pnl_Filtro.SuspendLayout();
             SuspendLayout();
             // 
             // Pnl_Prov
@@ -64,6 +62,7 @@
             // Pnl_Table_Prov
             // 
             Pnl_Table_Prov.AutoSize = true;
+            Pnl_Table_Prov.BackColor = Color.White;
             Pnl_Table_Prov.Controls.Add(DGV_Table_Prov);
             Pnl_Table_Prov.Dock = DockStyle.Fill;
             Pnl_Table_Prov.Location = new Point(0, 80);
@@ -75,6 +74,7 @@
             // 
             // DGV_Table_Prov
             // 
+            DGV_Table_Prov.AllowUserToAddRows = false;
             DGV_Table_Prov.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGV_Table_Prov.Dock = DockStyle.Fill;
             DGV_Table_Prov.Location = new Point(51, 33);
@@ -88,6 +88,8 @@
             // 
             // Pnl_Buttons
             // 
+            Pnl_Buttons.BackColor = Color.White;
+            Pnl_Buttons.Controls.Add(BProvRemoved);
             Pnl_Buttons.Controls.Add(Btn_Eliminar_Prov);
             Pnl_Buttons.Controls.Add(panel1);
             Pnl_Buttons.Controls.Add(Btn_Upd_Prov);
@@ -102,17 +104,36 @@
             Pnl_Buttons.Size = new Size(257, 520);
             Pnl_Buttons.TabIndex = 7;
             // 
+            // BProvRemoved
+            // 
+            BProvRemoved.BackColor = Color.DarkRed;
+            BProvRemoved.Cursor = Cursors.Hand;
+            BProvRemoved.Dock = DockStyle.Bottom;
+            BProvRemoved.Font = new Font("Segoe UI", 11F);
+            BProvRemoved.ForeColor = Color.White;
+            BProvRemoved.Location = new Point(0, 340);
+            BProvRemoved.Margin = new Padding(3, 4, 3, 4);
+            BProvRemoved.Name = "BProvRemoved";
+            BProvRemoved.Size = new Size(234, 60);
+            BProvRemoved.TabIndex = 10;
+            BProvRemoved.Text = "Proveedores Eliminados";
+            BProvRemoved.UseVisualStyleBackColor = false;
+            BProvRemoved.Click += BProvRemoved_Click;
+            // 
             // Btn_Eliminar_Prov
             // 
+            Btn_Eliminar_Prov.BackColor = Color.Green;
+            Btn_Eliminar_Prov.Cursor = Cursors.Hand;
             Btn_Eliminar_Prov.Dock = DockStyle.Top;
             Btn_Eliminar_Prov.Font = new Font("Segoe UI", 11F);
+            Btn_Eliminar_Prov.ForeColor = Color.White;
             Btn_Eliminar_Prov.Location = new Point(0, 207);
             Btn_Eliminar_Prov.Margin = new Padding(3, 4, 3, 4);
             Btn_Eliminar_Prov.Name = "Btn_Eliminar_Prov";
             Btn_Eliminar_Prov.Size = new Size(234, 60);
             Btn_Eliminar_Prov.TabIndex = 9;
             Btn_Eliminar_Prov.Text = "Eliminar Proveedor";
-            Btn_Eliminar_Prov.UseVisualStyleBackColor = true;
+            Btn_Eliminar_Prov.UseVisualStyleBackColor = false;
             Btn_Eliminar_Prov.Click += Btn_Eliminar_Prov_Click;
             // 
             // panel1
@@ -126,15 +147,18 @@
             // 
             // Btn_Upd_Prov
             // 
+            Btn_Upd_Prov.BackColor = Color.Green;
+            Btn_Upd_Prov.Cursor = Cursors.Hand;
             Btn_Upd_Prov.Dock = DockStyle.Top;
             Btn_Upd_Prov.Font = new Font("Segoe UI", 11F);
+            Btn_Upd_Prov.ForeColor = Color.White;
             Btn_Upd_Prov.Location = new Point(0, 120);
             Btn_Upd_Prov.Margin = new Padding(3, 4, 3, 4);
             Btn_Upd_Prov.Name = "Btn_Upd_Prov";
             Btn_Upd_Prov.Size = new Size(234, 60);
             Btn_Upd_Prov.TabIndex = 7;
             Btn_Upd_Prov.Text = "Modificar Proveedor";
-            Btn_Upd_Prov.UseVisualStyleBackColor = true;
+            Btn_Upd_Prov.UseVisualStyleBackColor = false;
             Btn_Upd_Prov.Click += Btn_Upd_Prov_Click;
             // 
             // Pnl_Space1
@@ -148,61 +172,45 @@
             // 
             // Btn_Emp_Prov
             // 
+            Btn_Emp_Prov.BackColor = Color.DarkRed;
+            Btn_Emp_Prov.Cursor = Cursors.Hand;
             Btn_Emp_Prov.Dock = DockStyle.Bottom;
             Btn_Emp_Prov.Font = new Font("Segoe UI", 11F);
+            Btn_Emp_Prov.ForeColor = Color.White;
             Btn_Emp_Prov.Location = new Point(0, 400);
             Btn_Emp_Prov.Margin = new Padding(3, 4, 3, 4);
             Btn_Emp_Prov.Name = "Btn_Emp_Prov";
             Btn_Emp_Prov.Size = new Size(234, 60);
             Btn_Emp_Prov.TabIndex = 3;
             Btn_Emp_Prov.Text = "Empleados Proveedor";
-            Btn_Emp_Prov.UseVisualStyleBackColor = true;
+            Btn_Emp_Prov.UseVisualStyleBackColor = false;
             Btn_Emp_Prov.Click += Btn_Emp_Prov_Click;
             // 
             // Btn_Add_Prov
             // 
+            Btn_Add_Prov.BackColor = Color.Green;
+            Btn_Add_Prov.Cursor = Cursors.Hand;
             Btn_Add_Prov.Dock = DockStyle.Top;
             Btn_Add_Prov.Font = new Font("Segoe UI", 11F);
+            Btn_Add_Prov.ForeColor = Color.White;
             Btn_Add_Prov.Location = new Point(0, 33);
             Btn_Add_Prov.Margin = new Padding(3, 4, 3, 4);
             Btn_Add_Prov.Name = "Btn_Add_Prov";
             Btn_Add_Prov.Size = new Size(234, 60);
             Btn_Add_Prov.TabIndex = 0;
             Btn_Add_Prov.Text = "Añadir Nuevo Proveedor";
-            Btn_Add_Prov.UseVisualStyleBackColor = true;
+            Btn_Add_Prov.UseVisualStyleBackColor = false;
             Btn_Add_Prov.Click += Btn_Add_Prov_Click;
             // 
             // Pnl_Filtro
             // 
-            Pnl_Filtro.Controls.Add(CmB_Filtro_Prov);
-            Pnl_Filtro.Controls.Add(Lbl_Filtro_Prov);
+            Pnl_Filtro.BackColor = Color.White;
             Pnl_Filtro.Dock = DockStyle.Top;
             Pnl_Filtro.Location = new Point(0, 0);
             Pnl_Filtro.Margin = new Padding(3, 4, 3, 4);
             Pnl_Filtro.Name = "Pnl_Filtro";
             Pnl_Filtro.Size = new Size(914, 80);
             Pnl_Filtro.TabIndex = 3;
-            // 
-            // CmB_Filtro_Prov
-            // 
-            CmB_Filtro_Prov.DropDownStyle = ComboBoxStyle.DropDownList;
-            CmB_Filtro_Prov.Font = new Font("Segoe UI", 11F);
-            CmB_Filtro_Prov.FormattingEnabled = true;
-            CmB_Filtro_Prov.Location = new Point(154, 20);
-            CmB_Filtro_Prov.Margin = new Padding(3, 4, 3, 4);
-            CmB_Filtro_Prov.Name = "CmB_Filtro_Prov";
-            CmB_Filtro_Prov.Size = new Size(199, 33);
-            CmB_Filtro_Prov.TabIndex = 3;
-            // 
-            // Lbl_Filtro_Prov
-            // 
-            Lbl_Filtro_Prov.AutoSize = true;
-            Lbl_Filtro_Prov.Font = new Font("Segoe UI", 11F);
-            Lbl_Filtro_Prov.Location = new Point(51, 27);
-            Lbl_Filtro_Prov.Name = "Lbl_Filtro_Prov";
-            Lbl_Filtro_Prov.Size = new Size(99, 25);
-            Lbl_Filtro_Prov.TabIndex = 2;
-            Lbl_Filtro_Prov.Text = "Filtrar por:";
             // 
             // V_Proveedores
             // 
@@ -219,8 +227,6 @@
             Pnl_Table_Prov.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DGV_Table_Prov).EndInit();
             Pnl_Buttons.ResumeLayout(false);
-            Pnl_Filtro.ResumeLayout(false);
-            Pnl_Filtro.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -228,11 +234,6 @@
         #endregion
 
         private Panel Pnl_Prov;
-        private Panel Pnl_Filtro;
-        private ComboBox CmB_Filtro_Prov;
-        private Label Lbl_Filtro_Prov;
-        private Panel Pnl_Table_Prov;
-        private DataGridView DGV_Table_Prov;
         private Panel Pnl_Buttons;
         private Button Btn_Emp_Prov;
         private Button Btn_Add_Prov;
@@ -240,5 +241,9 @@
         private Panel Pnl_Space1;
         private Button Btn_Eliminar_Prov;
         private Panel panel1;
+        private Button BProvRemoved;
+        private Panel Pnl_Table_Prov;
+        private DataGridView DGV_Table_Prov;
+        private Panel Pnl_Filtro;
     }
 }

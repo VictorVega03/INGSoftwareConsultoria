@@ -28,8 +28,9 @@ namespace Vistas
             string rfcCliente = Txt_RFC_Cliente.Text;
             string correoCliente = Txt_Email_Cliente.Text;
             string telefonoCliente = Txt_Phone_Cliente.Text;
+            string DireccionCliente = txtDireccion.Text;
 
-            InsertarCliente(id, nombreCliente, rfcCliente, correoCliente, telefonoCliente);
+            InsertarCliente(id, nombreCliente, rfcCliente, correoCliente, telefonoCliente, DireccionCliente);
 
             MessageBox.Show("Cliente Agregado Exitosamente");
             this.Close();
@@ -65,13 +66,13 @@ namespace Vistas
             return nuevoId;
         }
 
-        private void InsertarCliente(string id, string nombre, string rfc, string correo, string telefono)
+        private void InsertarCliente(string id, string nombre, string rfc, string correo, string telefono, string direccion)
         {
             DateTime getFechayHora = DateTime.Now;
             Cuando = getFechayHora.ToString("yyyy-MM-dd HH:mm:ss.fff");
 
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            string query = "INSERT INTO Clientes (Id_Client, Nom_Client, RFC_Client, Email_Client, Phone_Client, LifeOrDie, Cuando) VALUES (@Id, @Nombre, @RFC, @Correo, @Telefono, @LifeOrDie, @Cuando)";
+            string query = "INSERT INTO Clientes (Id_Client, Nom_Client, RFC_Client, Email_Client, Phone_Client, LifeOrDie, Cuando, direccion) VALUES (@Id, @Nombre, @RFC, @Correo, @Telefono, @LifeOrDie, @Cuando, @Direccion)";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -84,6 +85,7 @@ namespace Vistas
                     command.Parameters.AddWithValue("@Telefono", telefono);
                     command.Parameters.AddWithValue("@LifeOrDie", 1);
                     command.Parameters.AddWithValue("@Cuando", Cuando);
+                    command.Parameters.AddWithValue("@Direccion", direccion);
 
                     connection.Open();
                     command.ExecuteNonQuery();

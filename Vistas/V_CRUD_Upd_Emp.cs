@@ -26,7 +26,7 @@ namespace Vistas
             LlenarComboBoxPermisos();
             Txt_ID_Emp.Text = idEmpleado;
             Txt_Nom_Emp.Text = nombreEmpleado;
-            BoxPuesto.SelectedIndex = BoxPuesto.FindStringExact(PuestoEmpleado);
+            BoxPuesto.SelectedIndex = BoxPuesto.FindStringExact(PuestoEmpleado);            
             Txt_RFC_Emp.Text = rfcEmpleado;
             Txt_Email_Emp.Text = emailEmpleado;
             Txt_Phone_Emp.Text = telefonoEmpleado;
@@ -35,7 +35,7 @@ namespace Vistas
         private void LlenarComboBoxPermisos()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            string query = "SELECT Id_Permits, WorkPosition_Permits FROM Permisos WHERE Id_Permits = 1 OR Id_Permits = 5";
+            string query = "SELECT Id_Permits, WorkPosition_Permits FROM Permisos WHERE Id_Permits = 2 OR Id_Permits = 4";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

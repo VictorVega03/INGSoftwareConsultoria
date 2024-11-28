@@ -25,7 +25,7 @@ namespace Vistas
         private void LlenarComboBoxPermisos()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            string query = "SELECT Id_Permits, WorkPosition_Permits FROM Permisos WHERE Id_Permits = 1 OR Id_Permits = 5";
+            string query = "SELECT Id_Permits, WorkPosition_Permits FROM Permisos WHERE Id_Permits = 2 OR Id_Permits = 4";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -39,18 +39,57 @@ namespace Vistas
                 BoxPuesto.ValueMember = "Id_Permits";             // Guardar Id_Permits
             }
         }
+        private void CrearUserLogin(string id, string nombre, string contrasena, int permisos)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            string query = "INSERT INTO InicioSesion (Id_LogIn, Pass_LogIn, Id_Permits, UserName) VALUES (@IdLogin, @Password, @Permits, @userNombre)";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdLogin", id);
+                        command.Parameters.AddWithValue("@Password", contrasena);
+                        command.Parameters.AddWithValue("@Permits", permisos);
+                        command.Parameters.AddWithValue("@userNombre", nombre);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al insertar en InicioSesion: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void Btn_Aceptar_Emp1_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(Txt_Nom_Emp.Text) ||
+    string.IsNullOrWhiteSpace(Txt_RFC_Emp.Text) ||
+    string.IsNullOrWhiteSpace(Txt_Email_Emp.Text) ||
+    string.IsNullOrWhiteSpace(Txt_Phone_Emp.Text) ||
+    string.IsNullOrWhiteSpace(Txt_Direccion_Emp.Text) ||
+    string.IsNullOrWhiteSpace(txtLoginPassword.Text) ||
+    BoxPuesto.SelectedValue == null)
+            {
+                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string id = generar_IdEmpleado();
             string nombre = Txt_Nom_Emp.Text;
             int permisos = Convert.ToInt32(BoxPuesto.SelectedValue);
             string rfc = Txt_RFC_Emp.Text;
             string email = Txt_Email_Emp.Text;
             string telefono = Txt_Phone_Emp.Text;
-            string direccion = Txt_Direccion_Emp.Text;         
+            string direccion = Txt_Direccion_Emp.Text;    
+            string contrasena = txtLoginPassword.Text;
 
             InsertarEmpleado(id, nombre, permisos, rfc, email, telefono, direccion);
+            CrearUserLogin(id, nombre, contrasena, permisos);
             MessageBox.Show("Empleado Agregado Exitosamente");
             this.Close();
         }

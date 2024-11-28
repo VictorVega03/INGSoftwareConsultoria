@@ -22,6 +22,7 @@
             // 
             // Pnl_Principal
             // 
+            Pnl_Principal.BackColor = Color.FromArgb(25, 46, 71);
             Pnl_Principal.Dock = DockStyle.Fill;
             Pnl_Principal.Location = new Point(0, 0);
             Pnl_Principal.Margin = new Padding(3, 4, 3, 4);

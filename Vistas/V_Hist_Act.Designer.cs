@@ -29,129 +29,146 @@
         private void InitializeComponent()
         {
             Pnl_Hist_Act = new Panel();
-            Pnl_Table_Hist_Act = new Panel();
-            DGV_Table_Hist_Act = new DataGridView();
+            Pnl_Table_Hist_Proyect = new Panel();
+            TablaHistAct = new DataGridView();
             Pnl_Buttons = new Panel();
-            Btn_Activar = new Button();
+            Bnota = new Button();
+            Pnl_Space1 = new Panel();
+            BverActividad = new Button();
             Pnl_Filtros = new Panel();
-            CmB_Filtro1_Hist_Act = new ComboBox();
-            Lbl_Filtro_Hist_Act = new Label();
             Pnl_Hist_Act.SuspendLayout();
-            Pnl_Table_Hist_Act.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)DGV_Table_Hist_Act).BeginInit();
+            Pnl_Table_Hist_Proyect.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)TablaHistAct).BeginInit();
             Pnl_Buttons.SuspendLayout();
-            Pnl_Filtros.SuspendLayout();
             SuspendLayout();
             // 
             // Pnl_Hist_Act
             // 
-            Pnl_Hist_Act.Controls.Add(Pnl_Table_Hist_Act);
+            Pnl_Hist_Act.Controls.Add(Pnl_Table_Hist_Proyect);
             Pnl_Hist_Act.Controls.Add(Pnl_Buttons);
             Pnl_Hist_Act.Controls.Add(Pnl_Filtros);
             Pnl_Hist_Act.Dock = DockStyle.Fill;
             Pnl_Hist_Act.Location = new Point(0, 0);
+            Pnl_Hist_Act.Margin = new Padding(4, 5, 4, 5);
             Pnl_Hist_Act.Name = "Pnl_Hist_Act";
-            Pnl_Hist_Act.Size = new Size(800, 450);
+            Pnl_Hist_Act.Size = new Size(1142, 750);
             Pnl_Hist_Act.TabIndex = 1;
             // 
-            // Pnl_Table_Hist_Act
+            // Pnl_Table_Hist_Proyect
             // 
-            Pnl_Table_Hist_Act.AutoSize = true;
-            Pnl_Table_Hist_Act.Controls.Add(DGV_Table_Hist_Act);
-            Pnl_Table_Hist_Act.Dock = DockStyle.Fill;
-            Pnl_Table_Hist_Act.Location = new Point(0, 60);
-            Pnl_Table_Hist_Act.Name = "Pnl_Table_Hist_Act";
-            Pnl_Table_Hist_Act.Padding = new Padding(45, 25, 30, 45);
-            Pnl_Table_Hist_Act.Size = new Size(575, 390);
-            Pnl_Table_Hist_Act.TabIndex = 1;
+            Pnl_Table_Hist_Proyect.AutoSize = true;
+            Pnl_Table_Hist_Proyect.BackColor = Color.White;
+            Pnl_Table_Hist_Proyect.Controls.Add(TablaHistAct);
+            Pnl_Table_Hist_Proyect.Dock = DockStyle.Fill;
+            Pnl_Table_Hist_Proyect.Location = new Point(0, 100);
+            Pnl_Table_Hist_Proyect.Margin = new Padding(4, 5, 4, 5);
+            Pnl_Table_Hist_Proyect.Name = "Pnl_Table_Hist_Proyect";
+            Pnl_Table_Hist_Proyect.Padding = new Padding(64, 41, 42, 75);
+            Pnl_Table_Hist_Proyect.Size = new Size(821, 650);
+            Pnl_Table_Hist_Proyect.TabIndex = 4;
             // 
-            // DGV_Table_Hist_Act
+            // TablaHistAct
             // 
-            DGV_Table_Hist_Act.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DGV_Table_Hist_Act.Dock = DockStyle.Fill;
-            DGV_Table_Hist_Act.Location = new Point(45, 25);
-            DGV_Table_Hist_Act.Name = "DGV_Table_Hist_Act";
-            DGV_Table_Hist_Act.Size = new Size(500, 320);
-            DGV_Table_Hist_Act.TabIndex = 0;
+            TablaHistAct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            TablaHistAct.Dock = DockStyle.Fill;
+            TablaHistAct.Location = new Point(64, 41);
+            TablaHistAct.Margin = new Padding(4, 5, 4, 5);
+            TablaHistAct.Name = "TablaHistAct";
+            TablaHistAct.RowHeadersWidth = 51;
+            TablaHistAct.Size = new Size(715, 534);
+            TablaHistAct.TabIndex = 0;
             // 
             // Pnl_Buttons
             // 
-            Pnl_Buttons.Controls.Add(Btn_Activar);
+            Pnl_Buttons.BackColor = Color.White;
+            Pnl_Buttons.Controls.Add(Bnota);
+            Pnl_Buttons.Controls.Add(Pnl_Space1);
+            Pnl_Buttons.Controls.Add(BverActividad);
             Pnl_Buttons.Dock = DockStyle.Right;
-            Pnl_Buttons.Location = new Point(575, 60);
+            Pnl_Buttons.Location = new Point(821, 100);
+            Pnl_Buttons.Margin = new Padding(4, 5, 4, 5);
             Pnl_Buttons.Name = "Pnl_Buttons";
-            Pnl_Buttons.Padding = new Padding(0, 30, 20, 45);
-            Pnl_Buttons.Size = new Size(225, 390);
-            Pnl_Buttons.TabIndex = 2;
+            Pnl_Buttons.Padding = new Padding(0, 50, 29, 75);
+            Pnl_Buttons.Size = new Size(321, 650);
+            Pnl_Buttons.TabIndex = 3;
             // 
-            // Btn_Activar
+            // Bnota
             // 
-            Btn_Activar.Dock = DockStyle.Top;
-            Btn_Activar.Font = new Font("Segoe UI", 11F);
-            Btn_Activar.Location = new Point(0, 30);
-            Btn_Activar.Name = "Btn_Activar";
-            Btn_Activar.Size = new Size(205, 45);
-            Btn_Activar.TabIndex = 0;
-            Btn_Activar.Text = "Reaunudar Actividad";
-            Btn_Activar.UseVisualStyleBackColor = true;
+            Bnota.BackColor = Color.DarkRed;
+            Bnota.Cursor = Cursors.Hand;
+            Bnota.Dock = DockStyle.Top;
+            Bnota.Font = new Font("Segoe UI", 11F);
+            Bnota.ForeColor = Color.White;
+            Bnota.Location = new Point(0, 159);
+            Bnota.Margin = new Padding(4, 5, 4, 5);
+            Bnota.Name = "Bnota";
+            Bnota.Size = new Size(292, 75);
+            Bnota.TabIndex = 7;
+            Bnota.Text = "Ver Notas de Actividad";
+            Bnota.UseVisualStyleBackColor = false;
+            // 
+            // Pnl_Space1
+            // 
+            Pnl_Space1.Dock = DockStyle.Top;
+            Pnl_Space1.Location = new Point(0, 125);
+            Pnl_Space1.Margin = new Padding(4, 5, 4, 5);
+            Pnl_Space1.Name = "Pnl_Space1";
+            Pnl_Space1.Size = new Size(292, 34);
+            Pnl_Space1.TabIndex = 6;
+            // 
+            // BverActividad
+            // 
+            BverActividad.BackColor = Color.Green;
+            BverActividad.Cursor = Cursors.Hand;
+            BverActividad.Dock = DockStyle.Top;
+            BverActividad.Font = new Font("Segoe UI", 11F);
+            BverActividad.ForeColor = Color.White;
+            BverActividad.Location = new Point(0, 50);
+            BverActividad.Margin = new Padding(4, 5, 4, 5);
+            BverActividad.Name = "BverActividad";
+            BverActividad.Size = new Size(292, 75);
+            BverActividad.TabIndex = 0;
+            BverActividad.Text = "Detalles de Actividad";
+            BverActividad.UseVisualStyleBackColor = false;
+            BverActividad.Click += BverActividad_Click;
             // 
             // Pnl_Filtros
             // 
-            Pnl_Filtros.Controls.Add(CmB_Filtro1_Hist_Act);
-            Pnl_Filtros.Controls.Add(Lbl_Filtro_Hist_Act);
+            Pnl_Filtros.BackColor = Color.White;
             Pnl_Filtros.Dock = DockStyle.Top;
             Pnl_Filtros.Location = new Point(0, 0);
+            Pnl_Filtros.Margin = new Padding(4, 5, 4, 5);
             Pnl_Filtros.Name = "Pnl_Filtros";
-            Pnl_Filtros.Size = new Size(800, 60);
+            Pnl_Filtros.Size = new Size(1142, 100);
             Pnl_Filtros.TabIndex = 0;
-            // 
-            // CmB_Filtro1_Hist_Act
-            // 
-            CmB_Filtro1_Hist_Act.Font = new Font("Segoe UI", 11F);
-            CmB_Filtro1_Hist_Act.FormattingEnabled = true;
-            CmB_Filtro1_Hist_Act.Location = new Point(135, 15);
-            CmB_Filtro1_Hist_Act.Name = "CmB_Filtro1_Hist_Act";
-            CmB_Filtro1_Hist_Act.Size = new Size(175, 28);
-            CmB_Filtro1_Hist_Act.TabIndex = 1;
-            // 
-            // Lbl_Filtro_Hist_Act
-            // 
-            Lbl_Filtro_Hist_Act.AutoSize = true;
-            Lbl_Filtro_Hist_Act.Font = new Font("Segoe UI", 11F);
-            Lbl_Filtro_Hist_Act.Location = new Point(45, 20);
-            Lbl_Filtro_Hist_Act.Name = "Lbl_Filtro_Hist_Act";
-            Lbl_Filtro_Hist_Act.Size = new Size(77, 20);
-            Lbl_Filtro_Hist_Act.TabIndex = 0;
-            Lbl_Filtro_Hist_Act.Text = "Filtrar por:";
             // 
             // V_Hist_Act
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1142, 750);
             Controls.Add(Pnl_Hist_Act);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 5, 4, 5);
             Name = "V_Hist_Act";
             Text = "V_Hist_Act";
             Pnl_Hist_Act.ResumeLayout(false);
             Pnl_Hist_Act.PerformLayout();
-            Pnl_Table_Hist_Act.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)DGV_Table_Hist_Act).EndInit();
+            Pnl_Table_Hist_Proyect.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)TablaHistAct).EndInit();
             Pnl_Buttons.ResumeLayout(false);
-            Pnl_Filtros.ResumeLayout(false);
-            Pnl_Filtros.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel Pnl_Hist_Act;
-        private Panel Pnl_Table_Hist_Act;
-        private DataGridView DGV_Table_Hist_Act;
-        private Panel Pnl_Buttons;
-        private Button Btn_Activar;
         private Panel Pnl_Filtros;
-        private ComboBox CmB_Filtro1_Hist_Act;
-        private Label Lbl_Filtro_Hist_Act;
+        private Panel Pnl_Buttons;
+        private Button Bnota;
+        private Panel Pnl_Space1;
+        private Button BverActividad;
+        private Panel Pnl_Table_Hist_Proyect;
+        private DataGridView TablaHistAct;
     }
 }

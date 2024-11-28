@@ -14,20 +14,32 @@ namespace Vistas
 {
     public partial class V_Clientes : Form
     {
+        private V_NavBar NavBar;
         private DataTable clientesDataTable;
 
-        public V_Clientes()
+        public V_Clientes(V_NavBar MainNavBar)
         {
             InitializeComponent();
-            LlenarComboBoxFiltro();
-            CargarDatosClientes();
+            userType(dataLogin.userPermits);
+            this.NavBar = MainNavBar;            
+            CargarDatosClientes("");
             ConfigurarTabla();
             DGV_Table_Client.Focus();
         }
-
-        private void LlenarComboBoxFiltro()
+        private void userType(int userPermits)
         {
-            // Aqui se llenara el combobox con los filtros que se saquen de la base de datos
+            if (userPermits == 2) // promotor
+            {
+                BclientesRemoved.Enabled = false;
+                BclientesRemoved.BackColor = Color.Gray;
+            }
+            else if (userPermits == 4) // empleado general
+            {
+                Btn_EliminarClient.Enabled = false;
+                Btn_EliminarClient.BackColor = Color.Gray;
+                BclientesRemoved.Enabled = false;
+                BclientesRemoved.BackColor = Color.Gray;
+            }
         }
         private void ConfigurarTabla()
         {
@@ -48,16 +60,27 @@ namespace Vistas
             DGV_Table_Client.Columns["RFC_Client"].HeaderText = "RFC Cliente";
             DGV_Table_Client.Columns["Email_Client"].HeaderText = "Correo";
             DGV_Table_Client.Columns["Phone_Client"].HeaderText = "Teléfono";
+            DGV_Table_Client.Columns["direccion"].HeaderText = "Direccion";
 
             // Habilitar scroll automático
             DGV_Table_Client.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DGV_Table_Client.ScrollBars = ScrollBars.Both;
+
+            // Configuración de colores
+            DGV_Table_Client.BackgroundColor = Color.AliceBlue; // Fondo general de la tabla
+            DGV_Table_Client.GridColor = Color.SteelBlue; // Color de las líneas de la cuadrícula
+
+            // Configuración de las celdas
+            DGV_Table_Client.DefaultCellStyle.BackColor = Color.LightCyan; // Fondo de las celdas
+            DGV_Table_Client.DefaultCellStyle.ForeColor = Color.Black; // Texto de las celdas
+            DGV_Table_Client.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
+            DGV_Table_Client.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
         }
         private void Btn_Add_Client_Click(object sender, EventArgs e)
         {
             V_CRUD_Add_Client add_Client = new V_CRUD_Add_Client();
             add_Client.ShowDialog();
-            CargarDatosClientes();
+            CargarDatosClientes("");
         }
 
         private void Btn_Upd_Client_Click(object sender, EventArgs e)
@@ -70,10 +93,11 @@ namespace Vistas
                 string rfc = selectedRow.Cells["RFC_Client"].Value?.ToString() ?? "N/A";
                 string email = selectedRow.Cells["Email_Client"].Value?.ToString() ?? "N/A";
                 string telefono = selectedRow.Cells["Phone_Client"].Value?.ToString() ?? "N/A";
+                string direccion = selectedRow.Cells["direccion"].Value?.ToString() ?? "N/A";
 
-                V_CRUD_Upd_Client upd_Client = new V_CRUD_Upd_Client(idCliente, nombre, rfc, email, telefono);
+                V_CRUD_Upd_Client upd_Client = new V_CRUD_Upd_Client(idCliente, nombre, rfc, email, telefono, direccion);
                 upd_Client.ShowDialog();
-                CargarDatosClientes();
+                CargarDatosClientes("");
             }
             else
             {
@@ -99,7 +123,7 @@ namespace Vistas
                     {
                         deleteCliente(idCliente);
                         MessageBox.Show("Cliente eliminado exitosamente.");
-                        CargarDatosClientes();
+                        CargarDatosClientes("");
                     }
                 }
                 else
@@ -111,7 +135,7 @@ namespace Vistas
             {
                 MessageBox.Show("Por favor, seleccione un cliente para eliminar.");
             }
-            CargarDatosClientes();
+            CargarDatosClientes("");
         }
         private void deleteCliente(string idCliente)
         {
@@ -127,27 +151,52 @@ namespace Vistas
             }
         }
 
-        private void CargarDatosClientes()
+        public void CargarDatosClientes(string filtro)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            string query = "SELECT Id_Client, Nom_Client, RFC_Client, Email_Client, Phone_Client FROM Clientes  WHERE LifeOrDIe = 1 ORDER BY Clientes.Cuando DESC";
+            string query = @"
+SELECT 
+    Id_Client, 
+    Nom_Client, 
+    RFC_Client, 
+    Email_Client, 
+    Phone_Client, 
+    direccion
+FROM 
+    Clientes
+WHERE 
+    LifeOrDIe = 1
+    AND (
+        Id_Client LIKE @Filtro OR
+        Nom_Client LIKE @Filtro OR
+        RFC_Client LIKE @Filtro OR
+        Email_Client LIKE @Filtro OR
+        Phone_Client LIKE @Filtro OR
+        direccion LIKE @Filtro
+    )
+ORDER BY 
+    Clientes.Cuando DESC";
+
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
-                clientesDataTable = new DataTable();
-                dataAdapter.Fill(clientesDataTable);
-                DGV_Table_Client.DataSource = clientesDataTable;
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    // Agregar el filtro con comodines para la búsqueda
+                    command.Parameters.AddWithValue("@Filtro", $"%{filtro}%");
+
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                    clientesDataTable = new DataTable();
+                    dataAdapter.Fill(clientesDataTable);
+                    DGV_Table_Client.DataSource = clientesDataTable;
+                }
             }
         }
-        private void BoxFiltroClient_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FiltrarDatosClientes();
-        }
-        private void FiltrarDatosClientes()
-        {
-            // Metodo para filtrar (tratar de no usar query a DB, hacerlo desde el datatable).
-        }
 
+
+        private void BclientesRemoved_Click(object sender, EventArgs e)
+        {
+            NavBar.AbrirFormularioEnPanel(new V_ClientesRemoved(), "Empleados Eliminados");
+        }
     }
 }

@@ -13,13 +13,15 @@ namespace Vistas
 {
     public partial class V_Employe_Prov : Form
     {
+        private V_NavBar NavBar;
         private DataTable empleadosProveedorDataTable;
 
-        public V_Employe_Prov()
+        public V_Employe_Prov(V_NavBar MainNavBar)
         {
-            InitializeComponent();
+            InitializeComponent();            
+            this.NavBar = MainNavBar;
             LlenarComboBoxProveedores();
-            CargarDatosEmpleadosProveedor();
+            CargarDatosEmpleadosProveedor("");
             ConfigurarTabla();
             DGV_Table_Emp_Prov.Focus();
         }
@@ -27,7 +29,7 @@ namespace Vistas
         private void LlenarComboBoxProveedores()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            string query = "SELECT Id_Prov, Nom_Prov FROM Provedores WHERE LifeOrDie = 1";
+            string query = "SELECT Id_Prov, Nom_Prov FROM Proveedores WHERE LifeOrDie = 1";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -38,13 +40,7 @@ namespace Vistas
                 // Agregar la opción "Todos" al ComboBox
                 DataRow newRow = dataTable.NewRow();
                 newRow["Nom_Prov"] = "Todos";
-                dataTable.Rows.InsertAt(newRow, 0);
-
-                // Asignar el DataTable como origen de datos del ComboBox
-                BoxFiltroEmpProv.DataSource = dataTable;
-                BoxFiltroEmpProv.DisplayMember = "Nom_Prov";
-                BoxFiltroEmpProv.ValueMember = "Id_Prov";
-                BoxFiltroEmpProv.SelectedIndex = 0; // Seleccionar "Todos" por defecto
+                dataTable.Rows.InsertAt(newRow, 0);               
             }
         }
 
@@ -67,13 +63,27 @@ namespace Vistas
 
             DGV_Table_Emp_Prov.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DGV_Table_Emp_Prov.ScrollBars = ScrollBars.Both;
+
+            DGV_Table_Emp_Prov.ReadOnly = true;
+            DGV_Table_Emp_Prov.AllowUserToAddRows = false;
+
+            // Configuración de colores
+            DGV_Table_Emp_Prov.BackgroundColor = Color.AliceBlue; // Fondo general de la tabla
+            DGV_Table_Emp_Prov.GridColor = Color.SteelBlue; // Color de las líneas de la cuadrícula
+
+            // Configuración de las celdas
+            DGV_Table_Emp_Prov.DefaultCellStyle.BackColor = Color.LightCyan; // Fondo de las celdas
+            DGV_Table_Emp_Prov.DefaultCellStyle.ForeColor = Color.Black; // Texto de las celdas
+            DGV_Table_Emp_Prov.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
+            DGV_Table_Emp_Prov.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
+
         }
 
         private void Btn_Add_Emp_Prov_Click(object sender, EventArgs e)
         {
             V_CRUD_Add_Emp_Prov Add_Emp_Prov = new V_CRUD_Add_Emp_Prov();
             Add_Emp_Prov.ShowDialog();
-            CargarDatosEmpleadosProveedor();
+            CargarDatosEmpleadosProveedor("");
         }
 
         private void Btn_Upd_Emp_Prov_Click(object sender, EventArgs e)
@@ -86,11 +96,11 @@ namespace Vistas
                 string rfc = selectedRow.Cells["RFC_Emp_Prov"].Value?.ToString() ?? "N/A";
                 string email = selectedRow.Cells["Email_Emp_Prov"].Value?.ToString() ?? "N/A";
                 string telefono = selectedRow.Cells["Phone_Emp_Prov"].Value?.ToString() ?? "N/A";
-                string proveedor = selectedRow.Cells["Nom_Prov"].Value?.ToString() ?? "N/A";
+                string idProveedor = selectedRow.Cells["Id_Prov"].Value?.ToString() ?? "N/A"; // Obtener Id_Prov en lugar de Nom_Prov
 
-                V_CRUD_Upd_Emp_Prov Upd_Emp_Prov = new V_CRUD_Upd_Emp_Prov(idEmpProv, nombreEmp, rfc, email, telefono, proveedor);
+                V_CRUD_Upd_Emp_Prov Upd_Emp_Prov = new V_CRUD_Upd_Emp_Prov(idEmpProv, nombreEmp, rfc, email, telefono, idProveedor);
                 Upd_Emp_Prov.ShowDialog();
-                CargarDatosEmpleadosProveedor();
+                CargarDatosEmpleadosProveedor("");
             }
             else
             {
@@ -116,7 +126,7 @@ namespace Vistas
                     {
                         deleteEmpleadoProveedor(idEmpProv);
                         MessageBox.Show("Empleado eliminado exitosamente.");
-                        CargarDatosEmpleadosProveedor();
+                        CargarDatosEmpleadosProveedor("");
                     }
                 }
                 else
@@ -133,7 +143,7 @@ namespace Vistas
         private void deleteEmpleadoProveedor(string idEmpProv)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            string query = "UPDATE  ProvedoresEmpleados SET LifeOrDie = 0 WHERE Id_Emp_Prov = @Id_Emp_Prov";
+            string query = "UPDATE  EmpleadosProveedor SET LifeOrDie = 0 WHERE Id_Emp_Prov = @Id_Emp_Prov";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -144,53 +154,55 @@ namespace Vistas
             }
         }
 
-        private void CargarDatosEmpleadosProveedor()
+        public void CargarDatosEmpleadosProveedor(string filtro)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             string query = @"
     SELECT 
-        ProvedoresEmpleados.Id_Emp_Prov,
-        ProvedoresEmpleados.Nom_Emp_Prov,
-        ProvedoresEmpleados.RFC_Emp_Prov,
-        ProvedoresEmpleados.Email_Emp_Prov,
-        ProvedoresEmpleados.Phone_Emp_Prov,
-        Provedores.Nom_Prov
-    FROM ProvedoresEmpleados
-    INNER JOIN Provedores ON ProvedoresEmpleados.Id_Prov = Provedores.Id_Prov 
-    WHERE ProvedoresEmpleados.LifeOrDie = 1 ORDER BY ProvedoresEmpleados.Cuando DESC";
+        EmpleadosProveedor.Id_Emp_Prov,
+        EmpleadosProveedor.Nom_Emp_Prov,
+        EmpleadosProveedor.RFC_Emp_Prov,
+        EmpleadosProveedor.Email_Emp_Prov,
+        EmpleadosProveedor.Phone_Emp_Prov,
+        Proveedores.Id_Prov, 
+        Proveedores.Nom_Prov
+    FROM 
+        EmpleadosProveedor
+    INNER JOIN 
+        Proveedores ON EmpleadosProveedor.Id_Prov = Proveedores.Id_Prov 
+    WHERE 
+        EmpleadosProveedor.LifeOrDie = 1 
+        AND (
+            EmpleadosProveedor.Id_Emp_Prov LIKE @Filtro OR
+            EmpleadosProveedor.Nom_Emp_Prov LIKE @Filtro OR
+            EmpleadosProveedor.RFC_Emp_Prov LIKE @Filtro OR
+            EmpleadosProveedor.Email_Emp_Prov LIKE @Filtro OR
+            EmpleadosProveedor.Phone_Emp_Prov LIKE @Filtro OR
+            Proveedores.Id_Prov LIKE @Filtro OR
+            Proveedores.Nom_Prov LIKE @Filtro
+        )
+    ORDER BY 
+        EmpleadosProveedor.Cuando DESC";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
-                empleadosProveedorDataTable = new DataTable();
-                dataAdapter.Fill(empleadosProveedorDataTable);
-                DGV_Table_Emp_Prov.DataSource = empleadosProveedorDataTable;
-            }
-        }
-
-        private void BoxFiltroEmpProv_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FiltrarDatosEmpleadosProveedor();
-        }
-
-        private void FiltrarDatosEmpleadosProveedor()
-        {
-            if (!string.IsNullOrEmpty(BoxFiltroEmpProv.Text))
-            {
-                if (BoxFiltroEmpProv.Text == "Todos")
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    // Agregar el filtro con comodines para la búsqueda
+                    command.Parameters.AddWithValue("@Filtro", $"%{filtro}%");
+
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                    empleadosProveedorDataTable = new DataTable();
+                    dataAdapter.Fill(empleadosProveedorDataTable);
                     DGV_Table_Emp_Prov.DataSource = empleadosProveedorDataTable;
                 }
-                else
-                {
-                    string proveedor = BoxFiltroEmpProv.Text;
-
-                    DataView dataView = new DataView(empleadosProveedorDataTable);
-                    dataView.RowFilter = $"Nom_Prov = '{proveedor}'";
-
-                    DGV_Table_Emp_Prov.DataSource = dataView;
-                }
             }
+        }
+
+
+        private void BEmpProvRemoved_Click(object sender, EventArgs e)
+        {
+         NavBar.AbrirFormularioEnPanel(new V_EmpProvRemoved(), "Empleados de Proveedor Eliminados");   
         }
     }
 }

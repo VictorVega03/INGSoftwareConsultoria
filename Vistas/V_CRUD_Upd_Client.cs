@@ -18,8 +18,9 @@ namespace Vistas
         public string RfcCliente { get; private set; }
         public string EmailCliente { get; private set; }
         public string TelefonoCliente { get; private set; }
+        public string DireccionCliente { get; private set; }
 
-        public V_CRUD_Upd_Client(string idCliente, string nombreCliente, string rfcCliente, string emailCliente, string telefonoCliente)
+        public V_CRUD_Upd_Client(string idCliente, string nombreCliente, string rfcCliente, string emailCliente, string telefonoCliente, string DireccionCliente)
         {
             InitializeComponent();
             Txt_ID_Client.Text = idCliente;
@@ -27,6 +28,7 @@ namespace Vistas
             Txt_RFC_Cliente.Text = rfcCliente;
             Txt_Email_Cliente.Text = emailCliente;
             Txt_Phone_Cliente.Text = telefonoCliente;
+            txtDireccion.Text = DireccionCliente;
         }
 
         private void Btn_Aceptar_Cliente2_Click(object sender, EventArgs e)
@@ -35,7 +37,7 @@ namespace Vistas
             RfcCliente = Txt_RFC_Cliente.Text;
             EmailCliente = Txt_Email_Cliente.Text;
             TelefonoCliente = Txt_Phone_Cliente.Text;
-
+            DireccionCliente = txtDireccion.Text;
             UpdateCliente();
             MessageBox.Show("Se ha editado el cliente");
             DialogResult = DialogResult.OK;
@@ -49,7 +51,8 @@ namespace Vistas
                              SET Nom_Client = @Nombre,
                                  RFC_Client = @RFC,
                                  Email_Client = @Correo,
-                                 Phone_Client = @Telefono
+                                 Phone_Client = @Telefono,
+                                 direccion = @Direccion
                              WHERE Id_Client = @IdCliente";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -61,6 +64,7 @@ namespace Vistas
                     command.Parameters.AddWithValue("@RFC", Txt_RFC_Cliente.Text);
                     command.Parameters.AddWithValue("@Correo", Txt_Email_Cliente.Text);
                     command.Parameters.AddWithValue("@Telefono", Txt_Phone_Cliente.Text);
+                    command.Parameters.AddWithValue("@Direccion", txtDireccion.Text);
 
                     connection.Open();
                     command.ExecuteNonQuery();

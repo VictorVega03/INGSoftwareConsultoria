@@ -37,6 +37,8 @@
             Btn_Cancelar = new Button();
             Btn_Aceptar = new Button();
             Pnl_Add = new Panel();
+            txt_rfcProv = new TextBox();
+            label1 = new Label();
             Txt_Nom_Prov = new TextBox();
             Txt_Repre_Prov = new TextBox();
             Txt_Email_Prov = new TextBox();
@@ -45,6 +47,8 @@
             Lbl_Repre_Prov = new Label();
             Lbl_Email_Prov = new Label();
             Lbl_Phone_Prov = new Label();
+            txtLoginPassword = new TextBox();
+            label2 = new Label();
             Pnl_CRUD_Add_Prov.SuspendLayout();
             Pnl_Buttons.SuspendLayout();
             Pnl_Add.SuspendLayout();
@@ -58,11 +62,12 @@
             Pnl_CRUD_Add_Prov.Location = new Point(0, 0);
             Pnl_CRUD_Add_Prov.Margin = new Padding(3, 4, 3, 4);
             Pnl_CRUD_Add_Prov.Name = "Pnl_CRUD_Add_Prov";
-            Pnl_CRUD_Add_Prov.Size = new Size(536, 349);
+            Pnl_CRUD_Add_Prov.Size = new Size(536, 422);
             Pnl_CRUD_Add_Prov.TabIndex = 2;
             // 
             // Pnl_Buttons
             // 
+            Pnl_Buttons.BackColor = Color.White;
             Pnl_Buttons.Controls.Add(Btn_Cancelar_Prov1);
             Pnl_Buttons.Controls.Add(Btn_Aceptar_Prov1);
             Pnl_Buttons.Controls.Add(Btn_Cancelar_Emp1);
@@ -70,7 +75,7 @@
             Pnl_Buttons.Controls.Add(Btn_Cancelar);
             Pnl_Buttons.Controls.Add(Btn_Aceptar);
             Pnl_Buttons.Dock = DockStyle.Bottom;
-            Pnl_Buttons.Location = new Point(0, 269);
+            Pnl_Buttons.Location = new Point(0, 342);
             Pnl_Buttons.Margin = new Padding(3, 4, 3, 4);
             Pnl_Buttons.Name = "Pnl_Buttons";
             Pnl_Buttons.Size = new Size(536, 80);
@@ -79,27 +84,33 @@
             // Btn_Cancelar_Prov1
             // 
             Btn_Cancelar_Prov1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Btn_Cancelar_Prov1.BackColor = Color.DarkRed;
+            Btn_Cancelar_Prov1.Cursor = Cursors.Hand;
             Btn_Cancelar_Prov1.Font = new Font("Segoe UI", 11F);
+            Btn_Cancelar_Prov1.ForeColor = Color.White;
             Btn_Cancelar_Prov1.Location = new Point(333, 20);
             Btn_Cancelar_Prov1.Margin = new Padding(3, 4, 3, 4);
             Btn_Cancelar_Prov1.Name = "Btn_Cancelar_Prov1";
             Btn_Cancelar_Prov1.Size = new Size(114, 40);
             Btn_Cancelar_Prov1.TabIndex = 6;
             Btn_Cancelar_Prov1.Text = "Cancelar";
-            Btn_Cancelar_Prov1.UseVisualStyleBackColor = true;
+            Btn_Cancelar_Prov1.UseVisualStyleBackColor = false;
             Btn_Cancelar_Prov1.Click += Btn_Cancelar_Prov1_Click;
             // 
             // Btn_Aceptar_Prov1
             // 
             Btn_Aceptar_Prov1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Btn_Aceptar_Prov1.BackColor = Color.Green;
+            Btn_Aceptar_Prov1.Cursor = Cursors.Hand;
             Btn_Aceptar_Prov1.Font = new Font("Segoe UI", 11F);
+            Btn_Aceptar_Prov1.ForeColor = Color.White;
             Btn_Aceptar_Prov1.Location = new Point(88, 20);
             Btn_Aceptar_Prov1.Margin = new Padding(3, 4, 3, 4);
             Btn_Aceptar_Prov1.Name = "Btn_Aceptar_Prov1";
             Btn_Aceptar_Prov1.Size = new Size(114, 40);
             Btn_Aceptar_Prov1.TabIndex = 5;
             Btn_Aceptar_Prov1.Text = "Aceptar";
-            Btn_Aceptar_Prov1.UseVisualStyleBackColor = true;
+            Btn_Aceptar_Prov1.UseVisualStyleBackColor = false;
             Btn_Aceptar_Prov1.Click += Btn_Aceptar_Prov1_Click;
             // 
             // Btn_Cancelar_Emp1
@@ -152,6 +163,11 @@
             // 
             // Pnl_Add
             // 
+            Pnl_Add.BackColor = Color.White;
+            Pnl_Add.Controls.Add(txtLoginPassword);
+            Pnl_Add.Controls.Add(label2);
+            Pnl_Add.Controls.Add(txt_rfcProv);
+            Pnl_Add.Controls.Add(label1);
             Pnl_Add.Controls.Add(Txt_Nom_Prov);
             Pnl_Add.Controls.Add(Txt_Repre_Prov);
             Pnl_Add.Controls.Add(Txt_Email_Prov);
@@ -164,8 +180,27 @@
             Pnl_Add.Location = new Point(0, 0);
             Pnl_Add.Margin = new Padding(3, 4, 3, 4);
             Pnl_Add.Name = "Pnl_Add";
-            Pnl_Add.Size = new Size(536, 271);
+            Pnl_Add.Size = new Size(536, 344);
             Pnl_Add.TabIndex = 9;
+            // 
+            // txt_rfcProv
+            // 
+            txt_rfcProv.Font = new Font("Segoe UI", 11F);
+            txt_rfcProv.Location = new Point(282, 133);
+            txt_rfcProv.Margin = new Padding(3, 4, 3, 4);
+            txt_rfcProv.Name = "txt_rfcProv";
+            txt_rfcProv.Size = new Size(222, 32);
+            txt_rfcProv.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 11F);
+            label1.Location = new Point(21, 136);
+            label1.Name = "label1";
+            label1.Size = new Size(171, 25);
+            label1.TabIndex = 5;
+            label1.Text = "RFC del Proveedor:";
             // 
             // Txt_Nom_Prov
             // 
@@ -188,7 +223,7 @@
             // Txt_Email_Prov
             // 
             Txt_Email_Prov.Font = new Font("Segoe UI", 11F);
-            Txt_Email_Prov.Location = new Point(282, 141);
+            Txt_Email_Prov.Location = new Point(282, 188);
             Txt_Email_Prov.Margin = new Padding(3, 4, 3, 4);
             Txt_Email_Prov.Name = "Txt_Email_Prov";
             Txt_Email_Prov.Size = new Size(222, 32);
@@ -197,7 +232,7 @@
             // Txt_Phone_Prov
             // 
             Txt_Phone_Prov.Font = new Font("Segoe UI", 11F);
-            Txt_Phone_Prov.Location = new Point(282, 201);
+            Txt_Phone_Prov.Location = new Point(282, 248);
             Txt_Phone_Prov.Margin = new Padding(3, 4, 3, 4);
             Txt_Phone_Prov.Name = "Txt_Phone_Prov";
             Txt_Phone_Prov.Size = new Size(222, 32);
@@ -227,7 +262,7 @@
             // 
             Lbl_Email_Prov.AutoSize = true;
             Lbl_Email_Prov.Font = new Font("Segoe UI", 11F);
-            Lbl_Email_Prov.Location = new Point(21, 144);
+            Lbl_Email_Prov.Location = new Point(21, 191);
             Lbl_Email_Prov.Name = "Lbl_Email_Prov";
             Lbl_Email_Prov.Size = new Size(71, 25);
             Lbl_Email_Prov.TabIndex = 2;
@@ -237,17 +272,36 @@
             // 
             Lbl_Phone_Prov.AutoSize = true;
             Lbl_Phone_Prov.Font = new Font("Segoe UI", 11F);
-            Lbl_Phone_Prov.Location = new Point(21, 204);
+            Lbl_Phone_Prov.Location = new Point(21, 252);
             Lbl_Phone_Prov.Name = "Lbl_Phone_Prov";
             Lbl_Phone_Prov.Size = new Size(192, 25);
             Lbl_Phone_Prov.TabIndex = 3;
             Lbl_Phone_Prov.Text = "Numero de Contacto:";
             // 
+            // txtLoginPassword
+            // 
+            txtLoginPassword.Font = new Font("Segoe UI", 11F);
+            txtLoginPassword.Location = new Point(281, 299);
+            txtLoginPassword.Margin = new Padding(3, 4, 3, 4);
+            txtLoginPassword.Name = "txtLoginPassword";
+            txtLoginPassword.Size = new Size(222, 32);
+            txtLoginPassword.TabIndex = 22;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11F);
+            label2.Location = new Point(16, 302);
+            label2.Name = "label2";
+            label2.Size = new Size(264, 25);
+            label2.TabIndex = 23;
+            label2.Text = "Contraseña para inicio sesion:";
+            // 
             // V_CRUD_Add_Prov
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(536, 349);
+            ClientSize = new Size(536, 422);
             Controls.Add(Pnl_CRUD_Add_Prov);
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
@@ -280,5 +334,9 @@
         private Label Lbl_Phone_Prov;
         private Button Btn_Cancelar_Prov1;
         private Button Btn_Aceptar_Prov1;
+        private TextBox txt_rfcProv;
+        private Label label1;
+        private TextBox txtLoginPassword;
+        private Label label2;
     }
 }

@@ -18,14 +18,15 @@ namespace Vistas
         public string RfcEmpleado { get; private set; }
         public string EmailEmpleado { get; private set; }
         public string TelefonoEmpleado { get; private set; }
+        private string idProveedor;
 
         public V_CRUD_Upd_Emp_Prov(string idEmpleado, string nombreEmpleado, string rfcEmpleado, string emailEmpleado, string telefonoEmpleado, string idProveedor)
         {
             InitializeComponent();
+            this.idProveedor = idProveedor;
             LlenarComboBoxProveedores();
             Txt_ID_Emp_Prov.Text = idEmpleado;
             Txt_Nom_Emp_Prov.Text = nombreEmpleado;
-            BoxProveedor.SelectedValue = idProveedor;
             Txt_RFC_Emp_Prov.Text = rfcEmpleado;
             Txt_Email_Emp_Prov.Text = emailEmpleado;
             Txt_Phone_Emp_Prov.Text = telefonoEmpleado;
@@ -34,7 +35,7 @@ namespace Vistas
         private void LlenarComboBoxProveedores()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            string query = "SELECT Id_Prov, Nom_Prov FROM Provedores WHERE LifeOrDie = 1";
+            string query = "SELECT Id_Prov, Nom_Prov FROM Proveedores WHERE LifeOrDie = 1";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -46,6 +47,9 @@ namespace Vistas
                 BoxProveedor.DataSource = dataTable;
                 BoxProveedor.DisplayMember = "Nom_Prov"; // Mostrar el nombre del proveedor
                 BoxProveedor.ValueMember = "Id_Prov";    // Guardar el ID del proveedor
+
+                // Establecer SelectedValue después de que el ComboBox se haya llenado
+                BoxProveedor.SelectedValue = idProveedor;
             }
         }
 
@@ -71,13 +75,13 @@ namespace Vistas
             }
 
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            string query = @"UPDATE ProvedoresEmpleados 
-                     SET Nom_Emp_Prov = @Nombre,
-                         RFC_Emp_Prov = @RFC,
-                         Email_Emp_Prov = @Correo,
-                         Phone_Emp_Prov = @Telefono,
-                         Id_Prov = @IdProveedor
-                     WHERE Id_Emp_Prov = @IdEmpleado";
+            string query = @"UPDATE EmpleadosProveedor 
+                         SET Nom_Emp_Prov = @Nombre,
+                             RFC_Emp_Prov = @RFC,
+                             Email_Emp_Prov = @Correo,
+                             Phone_Emp_Prov = @Telefono,
+                             Id_Prov = @IdProveedor
+                         WHERE Id_Emp_Prov = @IdEmpleado";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -95,7 +99,6 @@ namespace Vistas
                 }
             }
         }
-
 
         private void Btn_Cancelar_Emp_Prov2_Click(object sender, EventArgs e)
         {
