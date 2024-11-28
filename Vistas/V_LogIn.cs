@@ -32,7 +32,7 @@ namespace Vistas
             // Imagen de encabezado (logo)
             PictureBox logoPictureBox = new PictureBox
             {
-                ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "C:\\Users\\victorvega\\source\\repos\\INGSoftwareNew\\Vistas\\Images\\ConsultoriaImg.png"), // Ruta de la imagen
+                ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "C:\\Users\\victorvega\\source\\repos\\INGSoftwareConsultoria\\Vistas\\Images\\ConsultoriaImg.png"), // Ruta de la imagen
                 SizeMode = PictureBoxSizeMode.Zoom, // Ajusta la imagen para que se vea completa
                 Size = new Size(100, 100),
                 Location = new Point((centralPanel.Width - 100) / 2, 10) // Centrado horizontalmente
@@ -198,7 +198,7 @@ namespace Vistas
         {
             Graphics g = e.Graphics;
             
-            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "C:\\Users\\victorvega\\source\\repos\\INGSoftwareNew\\Vistas\\Images\\consultoriaBackground1.jpeg");
+            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "C:\\Users\\victorvega\\source\\repos\\INGSoftwareConsultoria\\Vistas\\Images\\gatoese.jpg");
 
             if (!File.Exists(imagePath))
             {
