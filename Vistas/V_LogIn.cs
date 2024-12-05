@@ -198,7 +198,7 @@ namespace Vistas
         {
             Graphics g = e.Graphics;
             
-            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "C:\\Users\\victorvega\\source\\repos\\INGSoftwareConsultoria\\Vistas\\Images\\gatoese.jpg");
+            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "C:\\Users\\victorvega\\source\\repos\\INGSoftwareConsultoria\\Vistas\\Images\\consultoriaBackground1.jpeg");
 
             if (!File.Exists(imagePath))
             {

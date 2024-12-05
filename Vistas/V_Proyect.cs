@@ -19,12 +19,13 @@ namespace Vistas
         public V_Proyect(V_NavBar MainNavBar)
         {
             InitializeComponent();
-            CargarAllProyectos();
+            CargarAllProyectos();                      
             userType(dataLogin.userPermits);
             this.NavBar = MainNavBar;            
             ConfigurarTabla();
-            FiltroFecha1.Value = DateTime.Now.AddDays(-5);
+            FiltroFecha1.Value = DateTime.Now.AddDays(-5);         
         }
+          
         private void userType(int userPermits)
         {
             if (userPermits == 3) // proveedor
@@ -80,8 +81,6 @@ namespace Vistas
             DGV_Tabla_Proyect.DefaultCellStyle.Font = new Font("Arial", 14);
             DGV_Tabla_Proyect.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 16, FontStyle.Bold);
 
-            // Centrar el texto
-            DGV_Tabla_Proyect.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DGV_Tabla_Proyect.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             // Cambiar nombres de encabezados
@@ -93,6 +92,18 @@ namespace Vistas
             DGV_Tabla_Proyect.Columns["Nombre_Empleado"].HeaderText = "Promotor Responsable";
             DGV_Tabla_Proyect.Columns["Nombre_Proveedor"].HeaderText = "Proveedor Responsable";
 
+            // Alineación de las celdas de acuerdo a la columna
+            // Centramos las columnas de identificadores
+            DGV_Tabla_Proyect.Columns["Id_Proyecto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DGV_Tabla_Proyect.Columns["Estado_Proyecto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Alineamos a la izquierda las columnas descriptivas
+            DGV_Tabla_Proyect.Columns["Nombre_Proyecto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Tabla_Proyect.Columns["Dia_Inicio"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Tabla_Proyect.Columns["Nombre_Cliente"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Tabla_Proyect.Columns["Nombre_Empleado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Tabla_Proyect.Columns["Nombre_Proveedor"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
             // Habilitar scroll automático
             DGV_Tabla_Proyect.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DGV_Tabla_Proyect.ScrollBars = ScrollBars.Both;
@@ -103,6 +114,8 @@ namespace Vistas
             DGV_Tabla_Proyect.ReadOnly = true;
             DGV_Tabla_Proyect.AllowUserToAddRows = false;
         }
+
+
         public void CargarAllProyectos(string filtro = "", DateTime? fechaInicio = null, DateTime? fechaFin = null)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
@@ -171,7 +184,7 @@ AND (
                     // Actualiza la tabla con los datos filtrados
                     DGV_Tabla_Proyect.DataSource = proyectosDataTable;
                 }
-            }
+            }            
         }
 
         public void CargarDatosProyectos(string filtro = "", DateTime? fechaInicio = null, DateTime? fechaFin = null)
@@ -236,14 +249,15 @@ ORDER BY P.Cuando DESC";
                     // Actualiza la tabla con los datos filtrados
                     DGV_Tabla_Proyect.DataSource = proyectosDataTable;
                 }
-            }
+            }        
         }          
 
         private void Btn_Add_Proyect_Click(object sender, EventArgs e)
         {
             V_CRUD_Add_Proyect Add_Proyect = new V_CRUD_Add_Proyect();
-            Add_Proyect.ShowDialog();
+            Add_Proyect.ShowDialog();            
             CargarDatosProyectos("");
+            CargarAllProyectos();
         }
 
         private void Btn_Upd_Proyect_Click(object sender, EventArgs e)
@@ -259,9 +273,9 @@ ORDER BY P.Cuando DESC";
                 string proveedor = selectedRow.Cells["Nombre_Proveedor"].Value?.ToString() ?? "N/A";
 
                 V_CRUD_Upd_Proyect updProyect = new V_CRUD_Upd_Proyect(idProyecto, nombreProyecto, cliente, estadoProyecto, empleado, proveedor, 0, NavBar);
-                updProyect.ShowDialog();
-
+                updProyect.ShowDialog();                
                 CargarDatosProyectos("");
+                CargarAllProyectos();
             }
             else
             {
@@ -276,8 +290,9 @@ ORDER BY P.Cuando DESC";
             {
                 string idProyecto = DGV_Tabla_Proyect.SelectedRows[0].Cells["Id_Proyecto"].Value.ToString();
                 V_CRUD_FPC_Proyect FPC_Proyect = new V_CRUD_FPC_Proyect(idProyecto, 0);
-                FPC_Proyect.ShowDialog();
+                FPC_Proyect.ShowDialog();                
                 CargarDatosProyectos("");
+                CargarAllProyectos();
             }
             else
             {
@@ -299,6 +314,17 @@ ORDER BY P.Cuando DESC";
                 // Verificar si hay actividades para el proyecto seleccionado
                 bool hayActividades = ExisteActividad(idProyecto);
 
+                string hayProveedor = DGV_Tabla_Proyect.SelectedRows[0].Cells["Nombre_Proveedor"].Value?.ToString();
+                if (hayProveedor == "Sin Asignar")
+                {
+                    // Preguntar si se desea agregar una nueva actividad
+                    DialogResult result = MessageBox.Show($"No se asignó un proveedor para el proyecto {idProyecto}. Favor de asignar un proveedor.",
+                                                          "Proveedor no asignado",
+                                                          MessageBoxButtons.OK);
+                    return;
+                                                        
+                }
+
                 if (hayActividades)
                 {
                     // Abrir el formulario de actividades pasando el ID del proyecto
@@ -317,6 +343,8 @@ ORDER BY P.Cuando DESC";
                         // Abrir el formulario para agregar una nueva actividad
                         V_CRUD_Add_Act addActivityForm = new V_CRUD_Add_Act(idProyecto);
                         addActivityForm.ShowDialog();
+                        UpdateEstadoProyecto(idProyecto);
+                        CargarAllProyectos();
                     }
                 }
             }
@@ -326,6 +354,27 @@ ORDER BY P.Cuando DESC";
             }
         }
 
+        private void UpdateEstadoProyecto(string idProyecto)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            string query = @"UPDATE Proyect 
+                     SET Id_SttProAct = @Estado
+                     WHERE Id_Proyecto = @IdProyecto";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    // Agregar los parámetros
+                    command.Parameters.AddWithValue("@IdProyecto", idProyecto);
+                    command.Parameters.AddWithValue("@Estado", 2);
+
+                    // Abrir conexión y ejecutar consulta
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
 
         private bool ExisteActividad(string idProyecto)
         {

@@ -32,8 +32,19 @@ namespace Vistas
             TablaHistProyect.DefaultCellStyle.Font = new Font("Arial", 14);
             TablaHistProyect.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 16, FontStyle.Bold);
 
-            // Centrar el texto
-            TablaHistProyect.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Centrar el texto de las celdas de identificadores
+            TablaHistProyect.Columns["Id_Proyecto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            TablaHistProyect.Columns["Estado_Proyecto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Alinear a la izquierda las columnas descriptivas
+            TablaHistProyect.Columns["Nombre_Proyecto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaHistProyect.Columns["Dia_Inicio"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaHistProyect.Columns["Dia_Termino"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaHistProyect.Columns["Nombre_Cliente"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaHistProyect.Columns["Nombre_Empleado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaHistProyect.Columns["Nombre_Proveedor"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Centrar el texto de los encabezados
             TablaHistProyect.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             // Cambiar nombres de encabezados
@@ -45,7 +56,6 @@ namespace Vistas
             TablaHistProyect.Columns["Nombre_Cliente"].HeaderText = "Cliente";
             TablaHistProyect.Columns["Nombre_Empleado"].HeaderText = "Promotor Responsable";
             TablaHistProyect.Columns["Nombre_Proveedor"].HeaderText = "Proveedor Responsable";
-
 
             // Habilitar scroll automático
             TablaHistProyect.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -66,6 +76,7 @@ namespace Vistas
             TablaHistProyect.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
             TablaHistProyect.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
         }
+
         public void CargarAllProyectos(string filtro = "", DateTime? fechaInicio = null, DateTime? fechaFin = null)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
