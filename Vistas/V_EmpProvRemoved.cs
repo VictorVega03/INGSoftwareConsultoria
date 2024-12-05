@@ -29,9 +29,21 @@ namespace Vistas
             TablaEmpProvRemoved.DefaultCellStyle.Font = new Font("Arial", 14);
             TablaEmpProvRemoved.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 19, FontStyle.Bold);
 
-            TablaEmpProvRemoved.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Centrar el texto de las celdas de identificadores
+            TablaEmpProvRemoved.Columns["Id_Emp_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            TablaEmpProvRemoved.Columns["RFC_Emp_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaEmpProvRemoved.Columns["Phone_Emp_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            TablaEmpProvRemoved.Columns["Id_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Alinear a la izquierda las columnas de texto
+            TablaEmpProvRemoved.Columns["Nom_Emp_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaEmpProvRemoved.Columns["Email_Emp_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaEmpProvRemoved.Columns["Nom_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Centrar el texto de los encabezados
             TablaEmpProvRemoved.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+            // Cambiar nombres de encabezados
             TablaEmpProvRemoved.Columns["Id_Emp_Prov"].HeaderText = "ID Empleado Proveedor";
             TablaEmpProvRemoved.Columns["Nom_Emp_Prov"].HeaderText = "Nombre Empleado";
             TablaEmpProvRemoved.Columns["RFC_Emp_Prov"].HeaderText = "RFC Empleado";
@@ -54,8 +66,8 @@ namespace Vistas
             TablaEmpProvRemoved.DefaultCellStyle.ForeColor = Color.Black; // Texto de las celdas
             TablaEmpProvRemoved.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
             TablaEmpProvRemoved.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
-
         }
+
         private void BactivarEmpProv_Click(object sender, EventArgs e)
         {
             if (TablaEmpProvRemoved.SelectedRows.Count > 0)

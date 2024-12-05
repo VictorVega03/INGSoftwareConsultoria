@@ -31,8 +31,17 @@ namespace Vistas
             TablaProvRemoved.DefaultCellStyle.Font = new Font("Arial", 14);
             TablaProvRemoved.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 19, FontStyle.Bold);
 
-            // Centrar el texto
-            TablaProvRemoved.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Centrar el texto de las celdas de identificadores
+            TablaProvRemoved.Columns["Id_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            TablaProvRemoved.Columns["RFC_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaProvRemoved.Columns["Phone_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Alinear a la izquierda las columnas de texto
+            TablaProvRemoved.Columns["Nom_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaProvRemoved.Columns["Rep_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaProvRemoved.Columns["Email_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Centrar el texto de los encabezados
             TablaProvRemoved.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             // Cambiar nombres de encabezados
@@ -60,6 +69,7 @@ namespace Vistas
             TablaProvRemoved.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
             TablaProvRemoved.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
         }
+
         private void BActivarProv_Click(object sender, EventArgs e)
         {
             if (TablaProvRemoved.SelectedRows.Count > 0)

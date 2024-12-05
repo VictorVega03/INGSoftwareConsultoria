@@ -35,8 +35,17 @@ namespace Vistas
             DGV_Table_Prov.DefaultCellStyle.Font = new Font("Arial", 14);
             DGV_Table_Prov.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 19, FontStyle.Bold);
 
-            // Centrar el texto
-            DGV_Table_Prov.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Centrar el texto de las celdas de identificadores
+            DGV_Table_Prov.Columns["Id_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DGV_Table_Prov.Columns["RFC_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Table_Prov.Columns["Phone_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Alinear a la izquierda las columnas de texto
+            DGV_Table_Prov.Columns["Nom_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Table_Prov.Columns["Rep_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Table_Prov.Columns["Email_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Centrar el texto de los encabezados
             DGV_Table_Prov.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             // Cambiar nombres de encabezados
@@ -64,6 +73,7 @@ namespace Vistas
             DGV_Table_Prov.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
             DGV_Table_Prov.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
         }
+
 
         private void Btn_Add_Prov_Click(object sender, EventArgs e)
         {

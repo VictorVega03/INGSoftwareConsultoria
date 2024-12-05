@@ -70,7 +70,6 @@ namespace Vistas
             }
         }
 
-
         private void ConfigurarTabla()
         {
             // Ajustar la tabla para ocupar todo el panel
@@ -80,11 +79,19 @@ namespace Vistas
             tablaNotes.DefaultCellStyle.Font = new Font("Arial", 14);
             tablaNotes.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 15, FontStyle.Bold);
 
-            // Centrar el texto
-            tablaNotes.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            tablaNotes.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            tablaNotes.Columns["Nota"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            // Centrar el texto de las celdas de identificadores
+            tablaNotes.Columns["ID Nota"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            tablaNotes.Columns["ID Proyecto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            tablaNotes.Columns["ID Actividad"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+            // Alinear a la izquierda la columna de "Nota"
+            tablaNotes.Columns["Nota"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            tablaNotes.Columns["Fecha"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Centrar el texto de los encabezados
+            tablaNotes.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Cambiar nombres de encabezados
             tablaNotes.Columns["ID Nota"].HeaderText = "ID Nota";
             tablaNotes.Columns["ID Proyecto"].HeaderText = "ID Proyecto";
             tablaNotes.Columns["ID Actividad"].HeaderText = "ID Actividad";
@@ -110,6 +117,7 @@ namespace Vistas
             tablaNotes.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
             tablaNotes.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
         }
+
 
         private void BagregarNote_Click(object sender, EventArgs e)
         {

@@ -63,10 +63,23 @@ namespace Vistas
             tablaActividad.DefaultCellStyle.Font = new Font("Arial", 14);
             tablaActividad.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 15, FontStyle.Bold);
 
-            // Centrar el texto
-            tablaActividad.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Centrar el texto de las celdas de identificadores
+            tablaActividad.Columns["ID Actividad"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            tablaActividad.Columns["ID Proyecto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            tablaActividad.Columns["Estado Actividad"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Alinear a la izquierda las columnas descriptivas
+            tablaActividad.Columns["Nombre Proyecto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            tablaActividad.Columns["Nombre Actividad"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            tablaActividad.Columns["Empleado Responsable"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            tablaActividad.Columns["Empleado Proveedor"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            tablaActividad.Columns["Fecha Inicio"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            tablaActividad.Columns["Fecha Cierre"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Centrar el texto de los encabezados
             tablaActividad.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+            // Cambiar nombres de encabezados
             tablaActividad.Columns["ID Actividad"].HeaderText = "ID Actividad";
             tablaActividad.Columns["ID Proyecto"].HeaderText = "ID Proyecto";
             tablaActividad.Columns["Nombre Proyecto"].HeaderText = "Nombre Proyecto";
@@ -74,7 +87,6 @@ namespace Vistas
             tablaActividad.Columns["Empleado Responsable"].HeaderText = "Empleado Responsable";
             tablaActividad.Columns["Empleado Proveedor"].HeaderText = "Empleado Proveedor";
             tablaActividad.Columns["Estado Actividad"].HeaderText = "Estado Actividad";
-            //tablaActividad.Columns["Creado Por"].HeaderText = "Creado Por";
             tablaActividad.Columns["Fecha Inicio"].HeaderText = "Fecha Inicio";
             tablaActividad.Columns["Fecha Cierre"].HeaderText = "Fecha Cierre";
 
@@ -97,7 +109,8 @@ namespace Vistas
             tablaActividad.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
             tablaActividad.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
         }
-        
+
+
         public void CargarDatosActividad(string idProyecto, string filtro)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;

@@ -51,9 +51,21 @@ namespace Vistas
             DGV_Table_Emp_Prov.DefaultCellStyle.Font = new Font("Arial", 14);
             DGV_Table_Emp_Prov.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 19, FontStyle.Bold);
 
-            DGV_Table_Emp_Prov.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Centrar el texto de las celdas de identificadores
+            DGV_Table_Emp_Prov.Columns["Id_Emp_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DGV_Table_Emp_Prov.Columns["RFC_Emp_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Table_Emp_Prov.Columns["Phone_Emp_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DGV_Table_Emp_Prov.Columns["Id_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Alinear a la izquierda las columnas de texto
+            DGV_Table_Emp_Prov.Columns["Nom_Emp_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Table_Emp_Prov.Columns["Email_Emp_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Table_Emp_Prov.Columns["Nom_Prov"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;    
+
+            // Centrar el texto de los encabezados
             DGV_Table_Emp_Prov.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+            // Cambiar nombres de encabezados
             DGV_Table_Emp_Prov.Columns["Id_Emp_Prov"].HeaderText = "ID Empleado Proveedor";
             DGV_Table_Emp_Prov.Columns["Nom_Emp_Prov"].HeaderText = "Nombre Empleado";
             DGV_Table_Emp_Prov.Columns["RFC_Emp_Prov"].HeaderText = "RFC Empleado";
@@ -76,8 +88,8 @@ namespace Vistas
             DGV_Table_Emp_Prov.DefaultCellStyle.ForeColor = Color.Black; // Texto de las celdas
             DGV_Table_Emp_Prov.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
             DGV_Table_Emp_Prov.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
-
         }
+
 
         private void Btn_Add_Emp_Prov_Click(object sender, EventArgs e)
         {

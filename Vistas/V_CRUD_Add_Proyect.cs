@@ -123,19 +123,27 @@ namespace Vistas
             string descripcion = Txt_Descrip_Proyect.Text;
 
             // Validar campos requeridos
-            if (string.IsNullOrWhiteSpace(nombreProyecto) || string.IsNullOrWhiteSpace(idEmpleado) || string.IsNullOrWhiteSpace(idProveedor) || string.IsNullOrWhiteSpace(idCliente) || string.IsNullOrWhiteSpace(descripcion))
+            if (string.IsNullOrWhiteSpace(nombreProyecto) || string.IsNullOrWhiteSpace(idEmpleado) || string.IsNullOrWhiteSpace(idCliente) || string.IsNullOrWhiteSpace(descripcion))
             {
                 MessageBox.Show("Por favor, complete todos los campos obligatorios.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Llamar al método para insertar el proyecto
-            InsertarProyecto(idProyecto, nombreProyecto, idEmpleado, idProveedor, idCliente, descripcion);
+            int estado = 1;
+            int hayProveedor = int.Parse(BoxProveedor.SelectedIndex.ToString());       
+            if (hayProveedor == 0)
+            {             
+                estado = 0;
+                idProveedor = "P0000";
+            }
+            // Llamar al método para insertar el proyecto            
+            InsertarProyecto(idProyecto, nombreProyecto, idEmpleado, estado, idProveedor, idCliente, descripcion);
 
             MessageBox.Show("Proyecto Agregado Exitosamente");
             this.Close();
         }
-        private void InsertarProyecto(string idProyecto, string nombreProyecto, string idEmpleado, string idProveedor, string idCliente, string descripcion)
+
+        private void InsertarProyecto(string idProyecto, string nombreProyecto, string idEmpleado, int estado, string idProveedor, string idCliente, string descripcion)
         {
             DateTime getFechayHora = DateTime.Now;
             Cuando = getFechayHora.ToString("yyyy-MM-dd HH:mm:ss.fff");
@@ -151,8 +159,8 @@ namespace Vistas
                     command.Parameters.AddWithValue("@Id_Proyecto", idProyecto);
                     command.Parameters.AddWithValue("@Nombre", nombreProyecto);
                     command.Parameters.AddWithValue("@Id_Emp", idEmpleado);
-                    command.Parameters.AddWithValue("@Id_SttProAct", 0);
-                    command.Parameters.AddWithValue("@Id_Prov", string.IsNullOrWhiteSpace(idProveedor) ? (object)DBNull.Value : idProveedor);
+                    command.Parameters.AddWithValue("@Id_SttProAct", estado);
+                    command.Parameters.AddWithValue("@Id_Prov", idProveedor);
                     command.Parameters.AddWithValue("@Nombre_Cliente", string.IsNullOrWhiteSpace(idCliente) ? (object)DBNull.Value : idCliente);
                     command.Parameters.AddWithValue("@Descripcion", string.IsNullOrWhiteSpace(descripcion) ? (object)DBNull.Value : descripcion);
                     command.Parameters.AddWithValue("@Dia_Inicio", Cuando);
@@ -160,7 +168,7 @@ namespace Vistas
                     command.Parameters.AddWithValue("@Cuando", Cuando);                 
                     command.Parameters.AddWithValue("@LifeOrDie", 1);
 
-                    connection.Open();
+                    connection.Open();              
                     command.ExecuteNonQuery();
                 }
             }

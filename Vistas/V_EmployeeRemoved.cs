@@ -32,8 +32,18 @@ namespace Vistas
             TablaEmpRemoved.DefaultCellStyle.Font = new Font("Arial", 14);
             TablaEmpRemoved.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 19, FontStyle.Bold);
 
-            // Centrar el texto
-            TablaEmpRemoved.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Centrar el texto de las celdas de identificadores
+            TablaEmpRemoved.Columns["Id_Emp"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            TablaEmpRemoved.Columns["RFC_Emp"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaEmpRemoved.Columns["Phone_Emp"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Alinear a la izquierda las columnas de texto
+            TablaEmpRemoved.Columns["Nom_Emp"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaEmpRemoved.Columns["Permiso"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaEmpRemoved.Columns["Email_Emp"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaEmpRemoved.Columns["Direccion_Emp"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Centrar el texto de los encabezados
             TablaEmpRemoved.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             // Cambiar nombres de encabezados
@@ -62,6 +72,7 @@ namespace Vistas
             TablaEmpRemoved.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
             TablaEmpRemoved.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
         }
+
 
         private void BActivarEmp_Click(object sender, EventArgs e)
         {

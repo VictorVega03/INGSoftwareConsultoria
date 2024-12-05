@@ -54,6 +54,12 @@ namespace Vistas
             DGV_Table_Client.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DGV_Table_Client.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+            // Alinear el RFC a la izquierda
+            DGV_Table_Client.Columns["RFC_Client"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Table_Client.Columns["Nom_Client"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Table_Client.Columns["Email_Client"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DGV_Table_Client.Columns["direccion"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
             // Cambiar nombres de encabezados
             DGV_Table_Client.Columns["Id_Client"].HeaderText = "ID Cliente";
             DGV_Table_Client.Columns["Nom_Client"].HeaderText = "Nombre";
@@ -76,6 +82,7 @@ namespace Vistas
             DGV_Table_Client.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
             DGV_Table_Client.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
         }
+
         private void Btn_Add_Client_Click(object sender, EventArgs e)
         {
             V_CRUD_Add_Client add_Client = new V_CRUD_Add_Client();

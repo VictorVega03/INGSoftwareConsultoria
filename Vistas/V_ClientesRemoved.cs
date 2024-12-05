@@ -36,9 +36,15 @@ namespace Vistas
             TablaClientesRemoved.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             TablaClientesRemoved.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+            // Alinear el RFC a la izquierda
+            TablaClientesRemoved.Columns["RFC_Client"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaClientesRemoved.Columns["Nom_Client"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaClientesRemoved.Columns["Email_Client"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            TablaClientesRemoved.Columns["direccion"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
             // Cambiar nombres de encabezados
             TablaClientesRemoved.Columns["Id_Client"].HeaderText = "ID Cliente";
-            TablaClientesRemoved.Columns["Nom_Client"].HeaderText = "Nombre";            
+            TablaClientesRemoved.Columns["Nom_Client"].HeaderText = "Nombre";
             TablaClientesRemoved.Columns["RFC_Client"].HeaderText = "RFC Cliente";
             TablaClientesRemoved.Columns["Email_Client"].HeaderText = "Correo";
             TablaClientesRemoved.Columns["Phone_Client"].HeaderText = "Teléfono";
@@ -61,6 +67,7 @@ namespace Vistas
             TablaClientesRemoved.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue; // Fondo al seleccionar celda
             TablaClientesRemoved.DefaultCellStyle.SelectionForeColor = Color.White; // Texto al seleccionar celda
         }
+
 
         private void BActivarClient_Click(object sender, EventArgs e)
         {
